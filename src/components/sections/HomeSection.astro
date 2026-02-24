@@ -2,18 +2,20 @@
 ---
 <div class="page home-page active" id="page-home">
   <div class="home-content">
-    <div class="home-ornament"></div>
-    <h1 class="home-names">Chang <span class="amp">&amp;</span> John</h1>
-    <p class="home-date">September 2, 2026</p>
-    <p class="home-location">Palazzo Mannocchi · Petritoli, Italy</p>
-    <p class="home-blurb">We'd love for you to make it a getaway and join us for a multi-day celebration <strong>August 31 – September 4, 2026</strong></p>
-    <div class="home-photo">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=750&fit=crop" alt="Chang and John">
+    <div class="home-ornament" data-anim="1"></div>
+    <p class="home-prelude" data-anim="2">Together with their families</p>
+    <h1 class="home-names" data-anim="3">Chang <span class="amp">&amp;</span> John</h1>
+    <p class="home-date" data-anim="4">September 2, 2026</p>
+    <p class="home-location" data-anim="5">Palazzo Mannocchi · Petritoli, Italy</p>
+    <div class="home-divider" data-anim="6"></div>
+    <p class="home-blurb" data-anim="7">If time permits, we'd love for you to make it a getaway and join us for a few days of la dolce vita <strong>August 31 – September 4</strong></p>
+    <div class="home-photo" data-anim="8">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=750&fit=crop" alt="Chang and John" loading="eager">
     </div>
   </div>
 
   <!-- Citrus decorations -->
-  <div class="home-citrus-left">
+  <div class="home-citrus-left" aria-hidden="true">
     <svg width="100" height="150" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="60" cy="60" r="45" fill="#F26A2E" opacity="0.3"/>
       <circle cx="60" cy="60" r="35" fill="#F6B23E" opacity="0.25"/>
@@ -23,7 +25,7 @@
       <rect x="55" y="105" width="10" height="60" rx="5" fill="#D8CBBE" opacity="0.4"/>
     </svg>
   </div>
-  <div class="home-citrus-right">
+  <div class="home-citrus-right" aria-hidden="true">
     <svg width="100" height="150" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="60" cy="60" r="45" fill="#6B8DB5" opacity="0.25"/>
       <circle cx="60" cy="60" r="35" fill="#AFC6E9" opacity="0.2"/>
@@ -34,10 +36,12 @@
     </svg>
   </div>
 
-  <div class="scroll-indicator">
-    <span>Explore</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
+  <div class="scroll-indicator" aria-hidden="true">
+    <button class="scroll-btn" onclick="showPage('rsvp')" aria-label="RSVP">
+      <span>RSVP</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </button>
   </div>
 </div>

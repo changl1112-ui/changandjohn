@@ -11,7 +11,7 @@ import Footer from '../components/Footer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const { locale = 'en' } = Astro.props;
 ---
-<BaseLayout title="Chang & John — Petritoli, Italy 2026">
+<BaseLayout title="Chang & John — Petritoli, Italy 2026" locale={locale}>
   <Nav locale={locale} />
   <HomeSection />
   <RsvpSection />
@@ -21,7 +21,6 @@ const { locale = 'en' } = Astro.props;
   <ExploreSection />
   <QaSection />
   <Footer />
-  <script is:inline>window.__LOCALE__ = '{locale}';</script>
   <script is:inline src="/site.js"></script>
   <script is:inline src="/i18n.js"></script>
 </BaseLayout>

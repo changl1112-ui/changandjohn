@@ -2,23 +2,23 @@
 const { locale = 'en' } = Astro.props;
 const pathFor = (l) => l === 'en' ? '/en/' : (l === 'es' ? '/es/' : '/zh-cn/');
 ---
-<nav id="navbar">
+<nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-logo">C &amp; J</div>
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
     <span></span><span></span><span></span>
   </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a onclick="showPage('home')" class="active" data-page="home">Home</a></li>
-    <li><a onclick="showPage('rsvp')" data-page="rsvp">RSVP</a></li>
-    <li><a onclick="showPage('schedule')" data-page="schedule">Schedule</a></li>
-    <li><a onclick="showPage('travel')" data-page="travel">Travel</a></li>
-    <li><a onclick="showPage('accommodation')" data-page="accommodation">Accommodation</a></li>
-    <li><a onclick="showPage('explore')" data-page="explore">Explore</a></li>
-    <li><a onclick="showPage('qa')" data-page="qa">Q&amp;A</a></li>
+  <ul class="nav-links" id="navLinks" role="menubar">
+    <li role="none"><a role="menuitem" href="#home" onclick="showPage('home'); return false;" class="active" data-page="home" tabindex="0">Home</a></li>
+    <li role="none"><a role="menuitem" href="#rsvp" onclick="showPage('rsvp'); return false;" data-page="rsvp" tabindex="0">RSVP</a></li>
+    <li role="none"><a role="menuitem" href="#schedule" onclick="showPage('schedule'); return false;" data-page="schedule" tabindex="0">Schedule</a></li>
+    <li role="none"><a role="menuitem" href="#travel" onclick="showPage('travel'); return false;" data-page="travel" tabindex="0">Travel</a></li>
+    <li role="none"><a role="menuitem" href="#accommodation" onclick="showPage('accommodation'); return false;" data-page="accommodation" tabindex="0">Accommodation</a></li>
+    <li role="none"><a role="menuitem" href="#explore" onclick="showPage('explore'); return false;" data-page="explore" tabindex="0">Explore</a></li>
+    <li role="none"><a role="menuitem" href="#qa" onclick="showPage('qa'); return false;" data-page="qa" tabindex="0">Q&amp;A</a></li>
   </ul>
   <div class="lang-buttons" aria-label="Language switcher">
-    <a href={pathFor('en')} class={locale === 'en' ? 'active' : ''}>EN</a>
-    <a href={pathFor('es')} class={locale === 'es' ? 'active' : ''}>ES</a>
-    <a href={pathFor('zh-cn')} class={locale === 'zh-cn' ? 'active' : ''}>中文</a>
+    <a href={pathFor('en')} class={locale === 'en' ? 'active' : ''} lang="en">EN</a>
+    <a href={pathFor('es')} class={locale === 'es' ? 'active' : ''} lang="es">ES</a>
+    <a href={pathFor('zh-cn')} class={locale === 'zh-cn' ? 'active' : ''} lang="zh-CN">中文</a>
   </div>
 </nav>
