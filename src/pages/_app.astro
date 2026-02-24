@@ -1,0 +1,27 @@
+---
+import Nav from '../components/Nav.astro';
+import HomeSection from '../components/sections/HomeSection.astro';
+import RsvpSection from '../components/sections/RsvpSection.astro';
+import ScheduleSection from '../components/sections/ScheduleSection.astro';
+import TravelSection from '../components/sections/TravelSection.astro';
+import AccommodationSection from '../components/sections/AccommodationSection.astro';
+import ExploreSection from '../components/sections/ExploreSection.astro';
+import QaSection from '../components/sections/QaSection.astro';
+import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const { locale = 'en' } = Astro.props;
+---
+<BaseLayout title="Chang & John — Petritoli, Italy 2026">
+  <Nav locale={locale} />
+  <HomeSection />
+  <RsvpSection />
+  <ScheduleSection />
+  <TravelSection />
+  <AccommodationSection />
+  <ExploreSection />
+  <QaSection />
+  <Footer />
+  <script is:inline>window.__LOCALE__ = '{locale}';</script>
+  <script is:inline src="/site.js"></script>
+  <script is:inline src="/i18n.js"></script>
+</BaseLayout>

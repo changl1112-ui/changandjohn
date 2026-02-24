@@ -1,0 +1,12 @@
+{
+  "couple": "Chang & John",
+  "date": "September 2, 2026",
+  "location": "Palazzo Mannocchi · Petritoli, Italy",
+  "blurb": "We'd love for you to make it a getaway and join us for a multi-day celebration August 31 – September 4, 2026.",
+  "nav": ["home", "rsvp", "schedule", "travel", "accommodation", "explore", "qa"],
+  "scheduleIntro": "Five days of celebration in the Italian countryside.",
+  "qa": [
+    { "q": "What's the dress code?", "a": "We'll share dress code details for each event closer to the date. Think elegant but comfortable — it's the Italian countryside." },
+    { "q": "Do I need a visa to visit Italy?", "a": "U.S. and Canadian passport holders do not need a visa for short stays. Ensure your passport is valid 6+ months beyond travel dates." }
+  ]
+}

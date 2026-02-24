@@ -1,0 +1,153 @@
+---
+---
+<div class="page" id="page-rsvp">
+  <div class="page-inner" style="max-width:680px;">
+    <p class="section-label">Join Us</p>
+    <h2 class="section-title">RSVP</h2>
+    <div class="section-divider"></div>
+
+    <div class="rsvp-wrapper">
+      <div class="rsvp-progress" id="rsvpProgress">
+        <div class="rsvp-progress-dot active"></div>
+        <div class="rsvp-progress-dot"></div>
+        <div class="rsvp-progress-dot"></div>
+        <div class="rsvp-progress-dot"></div>
+      </div>
+
+      <div class="rsvp-step active" id="step1">
+        <h3>Will You Be Joining Us?</h3>
+        <p class="step-sub">We'd love to celebrate with you in Italy</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input type="text" class="form-input" id="firstName" placeholder="First name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input type="text" class="form-input" id="lastName" placeholder="Last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" class="form-input" id="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Will you attend?</label>
+          <div class="attendance-options">
+            <button type="button" class="attendance-btn" data-value="yes" onclick="setAttendance(this)">
+              <span class="att-icon">&#129346;</span> Joyfully Accept
+            </button>
+            <button type="button" class="attendance-btn" data-value="no" onclick="setAttendance(this)">
+              <span class="att-icon">&#128546;</span> Regretfully Decline
+            </button>
+          </div>
+        </div>
+        <div class="rsvp-nav">
+          <button class="rsvp-nav-btn next" id="step1Next" onclick="nextStep()" disabled>Continue</button>
+        </div>
+      </div>
+
+      <div class="rsvp-step" id="step2">
+        <h3>Tell Us More</h3>
+        <p class="step-sub">Bringing a guest? Which events will you join?</p>
+        <div class="form-group">
+          <label class="form-label">Bringing a plus one?</label>
+          <div class="attendance-options">
+            <button type="button" class="attendance-btn" data-value="yes" onclick="setPlusOne(this)">
+              <span class="att-icon">&#128107;</span> Yes
+            </button>
+            <button type="button" class="attendance-btn" data-value="no" onclick="setPlusOne(this)">
+              <span class="att-icon">&#128587;</span> Just Me
+            </button>
+          </div>
+        </div>
+        <div class="plusone-fields" id="plusoneFields">
+          <div class="form-group">
+            <label class="form-label">Guest's Full Name</label>
+            <input type="text" class="form-input" id="plusOneName" placeholder="Their full name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Which events will you attend?</label>
+          <div class="event-check-list">
+            <label class="event-check"><input type="checkbox" name="events" value="ceremony" checked><div class="check-box">&#10003;</div><div class="check-label"><div class="check-name">&#128146; Wedding Ceremony &amp; Reception</div><div class="check-detail">Sep 2 · 4:45 PM – Late</div></div></label>
+            <label class="event-check"><input type="checkbox" name="events" value="exploration"><div class="check-box">&#10003;</div><div class="check-label"><div class="check-name">&#127818; Exploration Time</div><div class="check-detail">Sep 1 · 12:00 PM</div></div><span class="check-tag optional">Optional</span></label>
+            <label class="event-check"><input type="checkbox" name="events" value="welcome"><div class="check-box">&#10003;</div><div class="check-label"><div class="check-name">&#129346; Welcome Pizza Party</div><div class="check-detail">Sep 1 · 7:30 PM</div></div></label>
+            <label class="event-check"><input type="checkbox" name="events" value="brunch"><div class="check-box">&#10003;</div><div class="check-label"><div class="check-name">&#129374; Post-Wedding Brunch</div><div class="check-detail">Sep 3 · 10:30 AM</div></div></label>
+            <label class="event-check"><input type="checkbox" name="events" value="beach"><div class="check-box">&#10003;</div><div class="check-label"><div class="check-name">&#127958; Beach Day &amp; Farewell Dinner</div><div class="check-detail">Sep 3 · 3:00 PM – Late</div></div><span class="check-tag optional">Optional</span></label>
+          </div>
+        </div>
+        <div class="rsvp-nav">
+          <button class="rsvp-nav-btn back" onclick="prevStep()">Back</button>
+          <button class="rsvp-nav-btn next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <div class="rsvp-step" id="step3">
+        <h3>Travel &amp; Stay</h3>
+        <p class="step-sub">Help us coordinate logistics</p>
+        <div class="form-group">
+          <label class="form-label">Accommodation Preference</label>
+          <select class="form-select" id="accommodation"><option value="">Select...</option><option value="palazzo">Stay at Palazzo Mannocchi</option><option value="hotel">Prefer a local hotel</option><option value="own">I'll arrange my own</option></select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Arrival Date</label>
+            <select class="form-select" id="arrivalDate"><option value="">Select...</option><option value="aug30">August 30</option><option value="aug31">August 31</option><option value="sep1">September 1</option><option value="sep2">September 2</option><option value="unsure">Not sure yet</option></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departure Date</label>
+            <select class="form-select" id="departureDate"><option value="">Select...</option><option value="sep3">September 3</option><option value="sep4">September 4</option><option value="sep5">September 5+</option><option value="unsure">Not sure yet</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Shuttle from airport?</label>
+          <div class="attendance-options">
+            <button type="button" class="attendance-btn" data-group="shuttle" data-value="yes" onclick="setToggle(this)"><span class="att-icon">&#128656;</span> Yes please</button>
+            <button type="button" class="attendance-btn" data-group="shuttle" data-value="no" onclick="setToggle(this)"><span class="att-icon">&#128663;</span> I'll drive</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Arriving airport</label>
+          <select class="form-select" id="airport"><option value="">Select...</option><option value="rome">Rome Fiumicino (FCO)</option><option value="ancona">Ancona Falconara (AOI)</option><option value="pescara">Pescara (PSR)</option><option value="bologna">Bologna (BLQ)</option><option value="other">Other / Not sure</option></select>
+        </div>
+        <div class="rsvp-nav">
+          <button class="rsvp-nav-btn back" onclick="prevStep()">Back</button>
+          <button class="rsvp-nav-btn next" onclick="nextStep()">Continue</button>
+        </div>
+      </div>
+
+      <div class="rsvp-step" id="step4">
+        <h3>Almost There!</h3>
+        <p class="step-sub">Just a few last details</p>
+        <div class="form-group">
+          <label class="form-label">Dietary Restrictions / Allergies</label>
+          <input type="text" class="form-input" id="dietary" placeholder="e.g. vegetarian, gluten-free...">
+        </div>
+        <div class="form-group" id="plusOneDietaryGroup" style="display:none">
+          <label class="form-label">Guest's Dietary Restrictions</label>
+          <input type="text" class="form-input" id="plusOneDietary" placeholder="Your guest's dietary needs...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Anything else?</label>
+          <textarea class="form-textarea" id="notes" placeholder="Questions, requests, or just a sweet note..."></textarea>
+        </div>
+        <div class="rsvp-nav">
+          <button class="rsvp-nav-btn back" onclick="prevStep()">Back</button>
+          <button class="rsvp-nav-btn next" onclick="submitRSVP()" id="submitBtn">Submit RSVP</button>
+        </div>
+      </div>
+
+      <div class="rsvp-success" id="rsvpSuccess">
+        <div class="success-icon">&#127881;</div>
+        <h3>You're Coming to Italy!</h3>
+        <p>We're so excited to celebrate with you. We'll be in touch with more details as the big day approaches.</p>
+      </div>
+      <div class="rsvp-decline" id="rsvpDecline">
+        <div style="font-size:3.5rem; margin-bottom:24px;">&#128140;</div>
+        <h3>We'll Miss You</h3>
+        <p>We completely understand. Thank you for letting us know — you'll be in our hearts on the day.</p>
+      </div>
+    </div>
+  </div>
+</div>
