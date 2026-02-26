@@ -1446,3 +1446,88 @@ footer {
   color: var(--terracotta);
   font-weight: 500;
 }
+
+/* ═══════════════════ ANNOUNCEMENT BANNER ═══════════════════ */
+:root {
+  --banner-height: 40px;
+}
+.announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  height: var(--banner-height);
+  background: var(--deep-blue);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 48px 0 16px;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.announcement-bar p {
+  margin: 0;
+  text-align: center;
+}
+.announcement-bar a {
+  color: var(--golden-lemon);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(246,178,62,0.4);
+  transition: all 0.3s;
+}
+.announcement-bar a:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+.announcement-bar strong {
+  color: var(--golden-lemon);
+  font-weight: 500;
+}
+.announcement-close {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(246,242,234,0.5);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.3s;
+}
+.announcement-close:hover {
+  color: var(--white);
+}
+
+/* Push nav and content down to make room for the banner */
+nav {
+  top: var(--banner-height) !important;
+}
+.page {
+  padding-top: calc(64px + var(--banner-height)) !important;
+}
+.page.active:not(.home-page) {
+  padding-top: calc(64px + var(--banner-height)) !important;
+}
+.home-page {
+  padding-top: calc(80px + var(--banner-height)) !important;
+}
+
+/* Mobile nav dropdown needs to shift down too */
+@media (max-width: 900px) {
+  .nav-links {
+    top: calc(64px + var(--banner-height)) !important;
+    max-height: calc(100vh - 64px - var(--banner-height)) !important;
+  }
+  .announcement-bar {
+    font-size: 0.74rem;
+    padding: 0 36px 0 12px;
+  }
+}
