@@ -1330,7 +1330,7 @@ footer {
 .registry-photo {
   width: 100%;
   max-width: 480px;
-  height: 320px;
+  height: 500px;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 16px 48px rgba(61,90,128,0.15);
