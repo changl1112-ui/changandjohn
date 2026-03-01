@@ -154,6 +154,14 @@
       setWidgetOpen(!widget.classList.contains('open'));
     });
 
+    // close if user taps/clicks away (including switching tabs/pages)
+    document.addEventListener('click', (e) => {
+      if (!widget.classList.contains('open')) return;
+      const insideWidget = widget.contains(e.target);
+      const onBubble = bubble.contains(e.target);
+      if (!insideWidget && !onBubble) setWidgetOpen(false);
+    });
+
     // close on Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && widget.classList.contains('open')) setWidgetOpen(false);
