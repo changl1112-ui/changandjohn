@@ -13,9 +13,9 @@ import Footer from '../components/Footer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const { locale = 'en' } = Astro.props;
 ---
-<BaseLayout title="Chang & John — Petritoli, Italy 2026" locale={locale}>
+<BaseLayout title="Chang & John - Petritoli, Italy 2026" locale={locale}>
   <div class="announcement-bar" id="announcementBar">
-    <p>Please <a href="#rsvp" onclick="showPage('rsvp'); return false;">RSVP</a> by <strong>June 1, 2026</strong> — the sooner the better so we can plan for everyone!</p>
+    <p>Please <a href="#rsvp" onclick="showPage('rsvp'); return false;">RSVP</a> by <strong>June 1, 2026</strong> - the sooner the better so we can plan for everyone!</p>
     <button class="announcement-close" onclick="document.getElementById('announcementBar').style.display='none'; document.documentElement.style.setProperty('--banner-height','0px');" aria-label="Dismiss">&times;</button>
   </div>
   <Nav locale={locale} />

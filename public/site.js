@@ -76,7 +76,7 @@ function toggleFaq(item) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// RSVP — Google Sheets Integration
+// RSVP - Google Sheets Integration
 // ═══════════════════════════════════════════════════════════
 
 window.SHEET_URL = 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';

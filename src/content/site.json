@@ -6,7 +6,7 @@
   "nav": ["home", "rsvp", "schedule", "travel", "accommodation", "explore", "qa"],
   "scheduleIntro": "Five days of celebration in the Italian countryside.",
   "qa": [
-    { "q": "What's the dress code?", "a": "We'll share dress code details for each event closer to the date. Think elegant but comfortable — it's the Italian countryside." },
+    { "q": "What's the dress code?", "a": "We'll share dress code details for each event closer to the date. Think elegant but comfortable - it's the Italian countryside." },
     { "q": "Do I need a visa to visit Italy?", "a": "U.S. and Canadian passport holders do not need a visa for short stays. Ensure your passport is valid 6+ months beyond travel dates." }
   ]
 }

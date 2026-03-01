@@ -5,7 +5,7 @@ const { title = 'Wedding', locale = 'en' } = Astro.props;
 const langMap = { en: 'en', es: 'es', 'zh-cn': 'zh-CN' };
 const htmlLang = langMap[locale] || 'en';
 
-const description = 'Join Chang & John for their wedding celebration in Petritoli, Italy — September 2, 2026.';
+const description = 'Join Chang & John for their wedding celebration in Petritoli, Italy - September 2, 2026.';
 const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
 ---
 <!doctype html>

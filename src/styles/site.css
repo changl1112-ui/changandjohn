@@ -842,7 +842,7 @@ footer {
   border-color: var(--deep-blue);
 }
 
-/* ═══════════════════ SCHEDULE — dress code & wedding block ═══════════════════ */
+/* ═══════════════════ SCHEDULE - dress code & wedding block ═══════════════════ */
 .event-dress {
   font-size: 0.82rem;
   color: var(--olive-leaf);
@@ -860,7 +860,7 @@ footer {
   border-bottom-color: rgba(61,90,128,0.2);
 }
 
-/* ═══════════════════ ACCOMMODATION — option cards ═══════════════════ */
+/* ═══════════════════ ACCOMMODATION - option cards ═══════════════════ */
 .accom-options {
   display: flex;
   flex-direction: column;
@@ -1305,7 +1305,7 @@ footer {
   font-weight: 500;
 }
 
-/* ═══════════════════ RESPONSIVE — explore / packing ═══════════════════ */
+/* ═══════════════════ RESPONSIVE - explore / packing ═══════════════════ */
 @media (max-width: 900px) {
   .tour-grid { grid-template-columns: 1fr; }
   .self-explore-grid { grid-template-columns: 1fr; }
@@ -1315,7 +1315,7 @@ footer {
   .italy-grid { grid-template-columns: 1fr; }
   .day-block--wedding { padding: 18px 14px; }
 }
-/* ═══════════════════ Q&A FIX — make category titles stand out ═══════════════════ */
+/* ═══════════════════ Q&A FIX - make category titles stand out ═══════════════════ */
 .faq-category-title {
   font-family: 'Outfit', sans-serif;
   font-size: 0.78rem;

@@ -20,7 +20,7 @@
     .filter((k) => {
       if (!k || typeof k !== 'string') return false;
       if (k.length < 10) return false; // avoid noisy single-word replacements
-      if (!/[\s,.;:!?()\-—]/.test(k)) return false;
+      if (!/[\s,.;:!?()\--]/.test(k)) return false;
       return true;
     })
     .sort((a, b) => b.length - a.length)
