@@ -42,6 +42,7 @@ const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
 
             const unlock = () => {
               body.style.visibility = 'visible';
+              window.dispatchEvent(new Event('wedding-auth-ok'));
               if (typeof window.initWeddingChat === 'function') window.initWeddingChat();
             };
 

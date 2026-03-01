@@ -141,6 +141,17 @@ function lookupGuest() {
   function queryGuest(f, l, label) {
     var fClean = cleanName(f);
     var lClean = cleanName(l);
+    var cacheKey = (fClean + '|' + lClean).toLowerCase();
+
+    // Fast client-side cache for repeat lookups
+    try {
+      var cachedRaw = sessionStorage.getItem('rsvp_lookup_' + cacheKey);
+      if (cachedRaw) {
+        var cached = JSON.parse(cachedRaw);
+        return Promise.resolve({ data: cached, label: label + '-cache', first: fClean, last: lClean });
+      }
+    } catch (e) {}
+
     var url = ACTIVE_SHEET_URL + '?first=' + encodeURIComponent(fClean) + '&last=' + encodeURIComponent(lClean);
     return fetch(url, { redirect: 'follow' })
       .then(function(res) {
@@ -148,23 +159,31 @@ function lookupGuest() {
         return res.json();
       })
       .then(function(data) {
+        try {
+          if (data && data.found) sessionStorage.setItem('rsvp_lookup_' + cacheKey, JSON.stringify(data));
+        } catch (e) {}
         return { data: data, label: label, first: fClean, last: lClean };
       });
   }
 
-  // Try: original → swapped → title-cased → title-cased swapped
-  Promise.resolve()
-    .then(function() { return queryGuest(first, last, 'original'); })
+  // Fast path: exact input first. If not found, fan out fallback attempts in parallel.
+  queryGuest(first, last, 'original')
     .then(function(r1) {
       if (r1.data && r1.data.found) return r1;
-      return queryGuest(last, first, 'swapped').then(function(r2) {
-        if (r2.data && r2.data.found) return r2;
-        return queryGuest(titleCase(first), titleCase(last), 'titlecase').then(function(r3) {
-          if (r3.data && r3.data.found) return r3;
-          return queryGuest(titleCase(last), titleCase(first), 'titlecase-swapped').then(function(r4) {
-            return r4;
-          });
-        });
+
+      var attempts = [
+        queryGuest(last, first, 'swapped'),
+        queryGuest(titleCase(first), titleCase(last), 'titlecase'),
+        queryGuest(titleCase(last), titleCase(first), 'titlecase-swapped')
+      ];
+
+      return Promise.allSettled(attempts).then(function(results) {
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].status === 'fulfilled' && results[i].value && results[i].value.data && results[i].value.data.found) {
+            return results[i].value;
+          }
+        }
+        return r1;
       });
     })
     .then(function(result) {

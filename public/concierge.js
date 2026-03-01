@@ -136,4 +136,11 @@
     if (!authOk()) return;
     render();
   };
+
+  window.addEventListener('DOMContentLoaded', function () {
+    window.initWeddingChat();
+  });
+  window.addEventListener('wedding-auth-ok', function () {
+    window.initWeddingChat();
+  });
 })();
