@@ -109,8 +109,12 @@ function lookupGuest() {
     errorEl.classList.remove('show');
   }
 
-  // Production mode: no mock fallback
-  if (!SHEET_URL) {
+  // Resolve active URL defensively at runtime
+  var ACTIVE_SHEET_URL = SHEET_URL || window.SHEET_URL || 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';
+  window.SHEET_URL = ACTIVE_SHEET_URL;
+  SHEET_URL = ACTIVE_SHEET_URL;
+
+  if (!ACTIVE_SHEET_URL) {
     showLookupError('sheet-url-not-configured');
     btn.textContent = originalText;
     btn.disabled = false;
@@ -120,7 +124,7 @@ function lookupGuest() {
   function queryGuest(f, l, label) {
     var fClean = cleanName(f);
     var lClean = cleanName(l);
-    var url = SHEET_URL + '?first=' + encodeURIComponent(fClean) + '&last=' + encodeURIComponent(lClean);
+    var url = ACTIVE_SHEET_URL + '?first=' + encodeURIComponent(fClean) + '&last=' + encodeURIComponent(lClean);
     return fetch(url, { redirect: 'follow' })
       .then(function(res) {
         if (!res.ok) throw new Error('http-' + res.status + ' via ' + label);
@@ -512,13 +516,17 @@ function submitDeclineMessage() {
 }
 
 function sendToSheet(rows, callback) {
-  if (!SHEET_URL) {
+  var ACTIVE_SHEET_URL = SHEET_URL || window.SHEET_URL || 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';
+  window.SHEET_URL = ACTIVE_SHEET_URL;
+  SHEET_URL = ACTIVE_SHEET_URL;
+
+  if (!ACTIVE_SHEET_URL) {
     console.log('RSVP data (no Sheet URL configured):', rows);
     if (callback) setTimeout(callback, 500);
     return;
   }
 
-  fetch(SHEET_URL, {
+  fetch(ACTIVE_SHEET_URL, {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
