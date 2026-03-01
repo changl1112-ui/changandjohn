@@ -61,7 +61,8 @@ function toggleFaq(item) {
 // RSVP — Google Sheets Integration
 // ═══════════════════════════════════════════════════════════
 
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';
+window.SHEET_URL = 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';
+var SHEET_URL = window.SHEET_URL;
 
 let currentStep = 1;
 let totalSteps = 5;
