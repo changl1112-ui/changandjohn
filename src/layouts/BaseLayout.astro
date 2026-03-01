@@ -28,10 +28,12 @@ const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
       window.__LOCALE__ = locale;
     </script>
   </head>
-  <body data-locale={locale} style={sitePassword ? 'visibility:hidden' : undefined}>
+  <body data-locale={locale} data-requires-auth={sitePassword ? '1' : '0'} style={sitePassword ? 'visibility:hidden' : undefined}>
     <div id="site-app"><slot /></div>
 
-    {sitePassword && (
+    <script src="/concierge.js" defer></script>
+
+    {sitePassword ? (
       <script is:inline define:vars={{ sitePassword }}>
         (() => {
           try {
@@ -40,6 +42,7 @@ const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
 
             const unlock = () => {
               body.style.visibility = 'visible';
+              if (typeof window.initWeddingChat === 'function') window.initWeddingChat();
             };
 
             if (sessionStorage.getItem(AUTH_KEY) === 'ok') {
@@ -60,6 +63,12 @@ const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
             document.body.style.visibility = 'visible';
           }
         })();
+      </script>
+    ) : (
+      <script is:inline>
+        window.addEventListener('DOMContentLoaded', () => {
+          if (typeof window.initWeddingChat === 'function') window.initWeddingChat();
+        });
       </script>
     )}
   </body>
