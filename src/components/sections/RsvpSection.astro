@@ -22,11 +22,11 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">First Name *</label>
-            <input type="text" class="form-input" id="lookupFirst" placeholder="First name">
+            <input type="text" class="form-input" id="lookupFirst" placeholder="First name" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupGuest();}">
           </div>
           <div class="form-group">
             <label class="form-label">Last Name *</label>
-            <input type="text" class="form-input" id="lookupLast" placeholder="Last name">
+            <input type="text" class="form-input" id="lookupLast" placeholder="Last name" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupGuest();}">
           </div>
         </div>
         <div class="lookup-error" id="lookupError">
