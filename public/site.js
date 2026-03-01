@@ -196,21 +196,16 @@ function lookupGuest() {
 }
 
 // Enter key UX: submit RSVP guest lookup from first/last name fields
-(function initLookupEnterKey() {
-  var firstEl = document.getElementById('lookupFirst');
-  var lastEl = document.getElementById('lookupLast');
-  if (!firstEl || !lastEl) return;
-
-  function onEnter(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      lookupGuest();
-    }
+document.addEventListener('keydown', function(e) {
+  var t = e.target;
+  if (!t) return;
+  var isLookupField = t.id === 'lookupFirst' || t.id === 'lookupLast';
+  if (!isLookupField) return;
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    lookupGuest();
   }
-
-  firstEl.addEventListener('keydown', onEnter);
-  lastEl.addEventListener('keydown', onEnter);
-})();
+});
 
 // Mock lookup for testing without Google Sheets
 function mockLookup(first, last, btn, originalText, errorEl) {
