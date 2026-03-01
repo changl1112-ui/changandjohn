@@ -61,7 +61,7 @@ function toggleFaq(item) {
 // RSVP — Google Sheets Integration
 // ═══════════════════════════════════════════════════════════
 
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxlPrra-jcolBKuCLnsu176p0XYNse49ToOIis39Zw/dev';
 
 let currentStep = 1;
 let totalSteps = 5;
@@ -85,7 +85,7 @@ function lookupGuest() {
   errorEl.classList.remove('show');
 
   // If no Sheet URL configured yet, fall back to mock data for testing
-  if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+  if (SHEET_URL === 'https://script.google.com/macros/s/AKfycbxlPrra-jcolBKuCLnsu176p0XYNse49ToOIis39Zw/dev') {
     console.log('No Sheet URL configured — using mock lookup');
     mockLookup(first, last, btn, originalText, errorEl);
     return;
