@@ -71,45 +71,88 @@ let guestAttendance = {};
 // ─── STEP 1: LOOKUP (live from Google Sheet) ───
 
 function lookupGuest() {
-  var first = document.getElementById('lookupFirst').value.trim();
-  var last = document.getElementById('lookupLast').value.trim();
+  var firstRaw = (document.getElementById('lookupFirst').value || '');
+  var lastRaw = (document.getElementById('lookupLast').value || '');
   var errorEl = document.getElementById('lookupError');
   var btn = document.querySelector('#step1 .rsvp-nav-btn');
+  var defaultErr = "We couldn't find that name on our guest list. Please try the name as it appears on your invitation, or reach out to Chang & John directly.";
 
-  if (!first || !last) { errorEl.classList.add('show'); return; }
+  function cleanName(v) {
+    return (v || '').replace(/\s+/g, ' ').trim();
+  }
+  function titleCase(v) {
+    return cleanName(v).toLowerCase().replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+  }
+  function showLookupError(reason) {
+    var detail = reason ? (' (debug: ' + reason + ')') : '';
+    if (errorEl) {
+      errorEl.textContent = defaultErr + detail;
+      errorEl.classList.add('show');
+    }
+  }
+
+  var first = cleanName(firstRaw);
+  var last = cleanName(lastRaw);
+
+  if (!first || !last) {
+    showLookupError('missing-first-or-last-name');
+    return;
+  }
 
   // Show loading state
   var originalText = btn.textContent;
   btn.textContent = 'Searching...';
   btn.disabled = true;
-  errorEl.classList.remove('show');
+  if (errorEl) {
+    errorEl.textContent = defaultErr;
+    errorEl.classList.remove('show');
+  }
 
   // If no Sheet URL configured yet, fall back to mock data for testing
-  if (!SHEET_URL || SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+  if (!SHEET_URL) {
     console.log('No Sheet URL configured — using mock lookup');
     mockLookup(first, last, btn, originalText, errorEl);
     return;
   }
 
-  function queryGuest(f, l) {
-    var url = SHEET_URL + '?first=' + encodeURIComponent((f || '').trim()) + '&last=' + encodeURIComponent((l || '').trim());
-    return fetch(url, { redirect: 'follow' }).then(function(res) { return res.json(); });
+  function queryGuest(f, l, label) {
+    var fClean = cleanName(f);
+    var lClean = cleanName(l);
+    var url = SHEET_URL + '?first=' + encodeURIComponent(fClean) + '&last=' + encodeURIComponent(lClean);
+    return fetch(url, { redirect: 'follow' })
+      .then(function(res) {
+        if (!res.ok) throw new Error('http-' + res.status + ' via ' + label);
+        return res.json();
+      })
+      .then(function(data) {
+        return { data: data, label: label, first: fClean, last: lClean };
+      });
   }
 
-  // Try direct lookup first, then swapped first/last as fallback
-  queryGuest(first, last)
-    .then(function(data) {
-      if (data && data.found) return data;
-      return queryGuest(last, first).then(function(swapped) {
-        return (swapped && swapped.found) ? swapped : data;
+  // Try: original → swapped → title-cased → title-cased swapped
+  Promise.resolve()
+    .then(function() { return queryGuest(first, last, 'original'); })
+    .then(function(r1) {
+      if (r1.data && r1.data.found) return r1;
+      return queryGuest(last, first, 'swapped').then(function(r2) {
+        if (r2.data && r2.data.found) return r2;
+        return queryGuest(titleCase(first), titleCase(last), 'titlecase').then(function(r3) {
+          if (r3.data && r3.data.found) return r3;
+          return queryGuest(titleCase(last), titleCase(first), 'titlecase-swapped').then(function(r4) {
+            return r4;
+          });
+        });
       });
     })
-    .then(function(data) {
+    .then(function(result) {
       btn.textContent = originalText;
       btn.disabled = false;
 
+      var data = result && result.data;
       if (!data || !data.found) {
-        errorEl.classList.add('show');
+        var reason = 'found=false after attempts: original, swapped, titlecase, titlecase-swapped';
+        if (data && data.reason) reason += '; api-reason=' + data.reason;
+        showLookupError(reason);
         return;
       }
 
@@ -125,7 +168,7 @@ function lookupGuest() {
       console.error('Lookup error:', err);
       btn.textContent = originalText;
       btn.disabled = false;
-      errorEl.classList.add('show');
+      showLookupError(err && err.message ? err.message : 'lookup-fetch-error');
     });
 }
 
@@ -467,7 +510,7 @@ function submitDeclineMessage() {
 }
 
 function sendToSheet(rows, callback) {
-  if (!SHEET_URL || SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+  if (!SHEET_URL) {
     console.log('RSVP data (no Sheet URL configured):', rows);
     if (callback) setTimeout(callback, 500);
     return;
