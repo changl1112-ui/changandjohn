@@ -91,15 +91,24 @@ function lookupGuest() {
     return;
   }
 
-  var url = SHEET_URL + '?first=' + encodeURIComponent(first) + '&last=' + encodeURIComponent(last);
+  function queryGuest(f, l) {
+    var url = SHEET_URL + '?first=' + encodeURIComponent((f || '').trim()) + '&last=' + encodeURIComponent((l || '').trim());
+    return fetch(url, { redirect: 'follow' }).then(function(res) { return res.json(); });
+  }
 
-  fetch(url, { redirect: 'follow' })
-    .then(function(res) { return res.json(); })
+  // Try direct lookup first, then swapped first/last as fallback
+  queryGuest(first, last)
+    .then(function(data) {
+      if (data && data.found) return data;
+      return queryGuest(last, first).then(function(swapped) {
+        return (swapped && swapped.found) ? swapped : data;
+      });
+    })
     .then(function(data) {
       btn.textContent = originalText;
       btn.disabled = false;
 
-      if (!data.found) {
+      if (!data || !data.found) {
         errorEl.classList.add('show');
         return;
       }
