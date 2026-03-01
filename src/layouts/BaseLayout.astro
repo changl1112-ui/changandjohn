@@ -7,6 +7,7 @@ const htmlLang = langMap[locale] || 'en';
 
 const description = 'Join Chang & John for their wedding celebration in Petritoli, Italy — September 2, 2026.';
 const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
+const chatWidgetSrc = import.meta.env.PUBLIC_CHAT_WIDGET_SRC || '';
 ---
 <!doctype html>
 <html lang={htmlLang}>
@@ -27,18 +28,38 @@ const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
     <script is:inline define:vars={{ locale }}>
       window.__LOCALE__ = locale;
     </script>
+    {sitePassword && <style is:inline>#site-app{display:none}</style>}
   </head>
   <body data-locale={locale}>
+    <div id="site-app"><slot /></div>
+
     {sitePassword && (
-      <script is:inline define:vars={{ sitePassword }}>
+      <script is:inline define:vars={{ sitePassword, chatWidgetSrc }}>
         (() => {
           try {
             const AUTH_KEY = 'wedding_site_auth_v1';
-            if (sessionStorage.getItem(AUTH_KEY) === 'ok') return;
+            const app = document.getElementById('site-app');
+
+            const allow = () => {
+              if (app) app.style.display = '';
+              if (chatWidgetSrc && !document.querySelector('script[data-chat-widget="1"]')) {
+                const s = document.createElement('script');
+                s.src = chatWidgetSrc;
+                s.async = true;
+                s.dataset.chatWidget = '1';
+                document.body.appendChild(s);
+              }
+            };
+
+            if (sessionStorage.getItem(AUTH_KEY) === 'ok') {
+              allow();
+              return;
+            }
 
             const entered = window.prompt('Enter wedding website password');
             if (entered === sitePassword) {
               sessionStorage.setItem(AUTH_KEY, 'ok');
+              allow();
               return;
             }
 
@@ -49,6 +70,5 @@ const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
         })();
       </script>
     )}
-    <slot />
   </body>
 </html>
