@@ -71,6 +71,11 @@
     style.textContent = `
       #wedding-chat-bubble{position:fixed;right:18px;bottom:18px;z-index:9999;background:#3D5A80;color:#fff;border:none;border-radius:999px;padding:12px 16px;font:500 14px Outfit,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.2);cursor:pointer}
       #wedding-chat-widget{position:fixed;right:18px;bottom:72px;width:min(92vw,340px);max-height:72vh;background:#fff;border:1px solid #e3ddd0;border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,.25);display:none;flex-direction:column;z-index:9999;overflow:hidden}
+      #wedding-chat-bubble.hidden{display:none}
+      @media (max-width: 700px){
+        #wedding-chat-widget{right:10px;left:10px;width:auto;bottom:78px;max-height:58vh}
+        #wedding-chat-bubble{right:10px;bottom:12px;padding:10px 14px}
+      }
       #wedding-chat-widget.open{display:flex}
       #wedding-chat-head{padding:10px 12px;background:#f7f4ee;border-bottom:1px solid #ece5d8}
       #wedding-chat-head h4{margin:0;color:#2f4361;font:600 15px Outfit,sans-serif}
@@ -132,10 +137,39 @@
       quick.appendChild(b);
     });
 
+    function setWidgetOpen(open) {
+      widget.classList.toggle('open', !!open);
+      bubble.classList.toggle('hidden', !!open);
+      if (open) input.focus();
+      if (!open) {
+        try { input.blur(); } catch(e) {}
+      }
+    }
+
     bubble.addEventListener('click', () => {
-      widget.classList.toggle('open');
-      if (widget.classList.contains('open')) input.focus();
+      setWidgetOpen(!widget.classList.contains('open'));
     });
+
+    // close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && widget.classList.contains('open')) setWidgetOpen(false);
+    });
+
+    // keep widget above mobile keyboard
+    function repositionForKeyboard() {
+      if (!widget.classList.contains('open')) return;
+      if (window.visualViewport) {
+        const vv = window.visualViewport;
+        const keyboard = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+        widget.style.bottom = (keyboard > 0 ? keyboard + 12 : 78) + 'px';
+      }
+    }
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', repositionForKeyboard);
+      window.visualViewport.addEventListener('scroll', repositionForKeyboard);
+    }
+    input.addEventListener('focus', repositionForKeyboard);
+    input.addEventListener('blur', () => { if (window.innerWidth <= 700) widget.style.bottom = '78px'; });
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
