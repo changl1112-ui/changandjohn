@@ -6,329 +6,341 @@
     <h2 class="section-title">Explore</h2>
     <div class="section-divider"></div>
 
-    <p class="explore-intro">We'd love for you to make this trip more than just a wedding — it's a chance to experience one of Italy's most beautiful and unspoiled regions. Here's everything you need to know about what's around you.</p>
+    <p class="explore-intro">We'd love for you to make this trip more than just a wedding — it's a chance to experience one of Italy's most beautiful and unspoiled regions. Click on each section below to learn more.</p>
 
     <!-- ═══════════════════════════════════════ -->
-    <!-- SECTION 1: PETRITOLI                    -->
+    <!-- SECTION 1: PETRITOLI (collapsible)      -->
     <!-- ═══════════════════════════════════════ -->
-    <div class="explore-zone">
-      <div class="zone-header">
+    <div class="explore-zone explore-zone--collapsible">
+      <div class="zone-header zone-header--toggle" onclick="toggleExploreZone(this)">
         <span class="zone-number">01</span>
         <h3 class="zone-title">Petritoli</h3>
         <p class="zone-subtitle">Your home base — a medieval hilltop village</p>
+        <span class="zone-toggle-icon">&#9660;</span>
       </div>
+      <div class="zone-content" style="display:none;">
 
-      <p class="explore-text">Petritoli is a small, walkable village in the Le Marche countryside with about 2,500 residents. It's not a tourist town — it's a real place where locals know each other by name, shops close for siesta, and the piazza comes alive in the evenings. Everything you need is within a few minutes on foot from the Palazzo.</p>
+        <p class="explore-text">Petritoli is a small, walkable village in the Le Marche countryside with about 2,500 residents. It's not a tourist town — it's a real place where locals know each other by name, shops close for siesta, and the piazza comes alive in the evenings. Everything you need is within a few minutes on foot from the Palazzo.</p>
 
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Don't Miss</h4>
-        <div class="place-list">
-          <div class="place-item place-item--highlight">
-            <span class="place-name">The Three Gothic Arches</span>
-            <span class="place-desc">The iconic entrance to the village — two 15th-century cylindrical towers framing three Gothic arches. Walk through them and you've arrived in Petritoli.</span>
-          </div>
-          <div class="place-item place-item--highlight">
-            <span class="place-name">Torre Civica (Bell Tower)</span>
-            <span class="place-desc">Climb to the top for panoramic views stretching from the Sibillini Mountains to the Adriatic Sea. Take the second set of stairs to the walkway around the outside for the best photos. Warning: the staircase is steep and dark until you reach the windows — but worth it.</span>
-          </div>
-          <div class="place-item place-item--highlight">
-            <span class="place-name">Teatro dell'Iride</span>
-            <span class="place-desc">A beautifully preserved historic theatre — one of the Marche Region's officially designated Historical Theatres. Check if any performances are happening during our week.</span>
-          </div>
-          <div class="place-item place-item--highlight">
-            <span class="place-name">The Passeggiata</span>
-            <span class="place-desc">Every evening, locals stroll through the village — this is the Italian <em>passeggiata</em>. Grab a gelato, join the walk, and soak it in. This is how you experience Petritoli.</span>
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Don't Miss</h4>
+          <div class="place-list">
+            <div class="place-item place-item--highlight">
+              <span class="place-name">The Three Gothic Arches</span>
+              <span class="place-desc">The iconic entrance to the village — two 15th-century cylindrical towers framing three Gothic arches. Walk through them and you've arrived in Petritoli.</span>
+            </div>
+            <div class="place-item place-item--highlight">
+              <span class="place-name">Torre Civica (Bell Tower)</span>
+              <span class="place-desc">Climb to the top for panoramic views stretching from the Sibillini Mountains to the Adriatic Sea. Take the second set of stairs to the walkway around the outside for the best photos. Warning: the staircase is steep and dark until you reach the windows — but worth it.</span>
+            </div>
+            <div class="place-item place-item--highlight">
+              <span class="place-name">Teatro dell'Iride</span>
+              <span class="place-desc">A beautifully preserved historic theatre — one of the Marche Region's officially designated Historical Theatres. Check if any performances are happening during our week.</span>
+            </div>
+            <div class="place-item place-item--highlight">
+              <span class="place-name">The Passeggiata</span>
+              <span class="place-desc">Every evening, locals stroll through the village — this is the Italian <em>passeggiata</em>. Grab a gelato, join the walk, and soak it in. This is how you experience Petritoli.</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Restaurants &amp; Bars</h4>
-        <div class="place-list">
-          <div class="place-item">
-            <span class="place-name">Osteria le Cornacchie</span>
-            <span class="place-desc">Cozy and intimate, seats up to 25. Reservations required: +39 349 856 0851</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Ristorante Re Squarchiò</span>
-            <span class="place-desc">Formal setting with high-quality food. Reservations required: +39 331 612 4177</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Hotel Roma</span>
-            <span class="place-desc">Informal, great food and atmosphere. No reservation needed.</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Pizzeria Girasole</span>
-            <span class="place-desc">The local pizzeria — casual and satisfying.</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Fanny</span>
-            <span class="place-desc">Casual bar, perfect for breakfast and aperitivo.</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Bottega Vitali</span>
-            <span class="place-desc">Primarily a food shop, but also serves paninis and aperitivo.</span>
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Restaurants &amp; Bars</h4>
+          <div class="place-list">
+            <div class="place-item">
+              <span class="place-name">Osteria le Cornacchie</span>
+              <span class="place-desc">Cozy and intimate, seats up to 25. Reservations required: +39 349 856 0851</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Ristorante Re Squarchiò</span>
+              <span class="place-desc">Formal setting with high-quality food. Reservations required: +39 331 612 4177</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Hotel Roma</span>
+              <span class="place-desc">Informal, great food and atmosphere. No reservation needed.</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Pizzeria Girasole</span>
+              <span class="place-desc">The local pizzeria — casual and satisfying.</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Fanny</span>
+              <span class="place-desc">Casual bar, perfect for breakfast and aperitivo.</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Bottega Vitali</span>
+              <span class="place-desc">Primarily a food shop, but also serves paninis and aperitivo.</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Must-Try: Bar Gelateria Tre Archi</h4>
-        <p class="explore-text">This one gets its own section. Tre Archi is <em>the</em> gathering spot in Petritoli — right inside the famous three arches. This is where all the locals go for breakfast every morning, so if you want to experience real Italian daily life, start your day here with an espresso and a cornetto. It opens at 6:30 AM and stays open until the last person leaves. Their artisan gelato (made with rice milk) is legendary — multiple reviewers call it the best gelato in Italy. They also serve local wines, craft beer, aperitivi, pastries, and light meals. Gluten-free options including cones are available. You'll end up here every day — trust us. And who knows… you might even get a taste of their gelato at the wedding itself. 🤫</p>
-      </div>
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Must-Try: Bar Gelateria Tre Archi</h4>
+          <p class="explore-text">This one gets its own section. Tre Archi is <em>the</em> gathering spot in Petritoli — right inside the famous three arches. This is where all the locals go for breakfast every morning, so if you want to experience real Italian daily life, start your day here with an espresso and a cornetto. It opens at 6:30 AM and stays open until the last person leaves. Their artisan gelato (made with rice milk) is legendary — multiple reviewers call it the best gelato in Italy. They also serve local wines, craft beer, aperitivi, pastries, and light meals. Gluten-free options including cones are available. You'll end up here every day — trust us. And who knows… you might even get a taste of their gelato at the wedding itself. 🤫</p>
+        </div>
 
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">What to Eat in Le Marche</h4>
-        <p class="explore-text">Le Marche has a rich food culture that rivals any region in Italy. Keep an eye out for: <em>olive all'ascolana</em> (stuffed fried olives — the local specialty), <em>vincisgrassi</em> (a rich lasagna with pork, mushrooms, and sometimes truffles), <em>ciauscolo</em> (a soft, spreadable salami unique to this region), local <em>pecorino</em> cheese (try it fresh or aged), <em>brodetto</em> (Adriatic fish stew with saffron), and <em>porchetta</em> (suckling pig with fennel and garlic). The region is also known for its truffles, honey, and <em>vino cotto</em> ("cooked wine" — a traditional dessert wine).</p>
-      </div>
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">What to Eat in Le Marche</h4>
+          <p class="explore-text">Le Marche has a rich food culture that rivals any region in Italy. Keep an eye out for: <em>olive all'ascolana</em> (stuffed fried olives — the local specialty), <em>vincisgrassi</em> (a rich lasagna with pork, mushrooms, and sometimes truffles), <em>ciauscolo</em> (a soft, spreadable salami unique to this region), local <em>pecorino</em> cheese (try it fresh or aged), <em>brodetto</em> (Adriatic fish stew with saffron), and <em>porchetta</em> (suckling pig with fennel and garlic). The region is also known for its truffles, honey, and <em>vino cotto</em> ("cooked wine" — a traditional dessert wine).</p>
+        </div>
 
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Groceries</h4>
-        <div class="place-list">
-          <div class="place-item">
-            <span class="place-name">Coal</span>
-            <span class="place-desc">The smallest grocery store, conveniently close to the Palazzo.</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Simply</span>
-            <span class="place-desc">Located just outside the town walls.</span>
-          </div>
-          <div class="place-item">
-            <span class="place-name">Eurospin</span>
-            <span class="place-desc">The largest grocery store — accessible by car.</span>
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Groceries</h4>
+          <div class="place-list">
+            <div class="place-item">
+              <span class="place-name">Coal</span>
+              <span class="place-desc">The smallest grocery store, conveniently close to the Palazzo.</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Simply</span>
+              <span class="place-desc">Located just outside the town walls.</span>
+            </div>
+            <div class="place-item">
+              <span class="place-name">Eurospin</span>
+              <span class="place-desc">The largest grocery store — accessible by car.</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Good to Know</h4>
-        <p class="explore-text">Petritoli has a pharmacy, bank, 2 ATMs, and a post office — all within walking distance. There's also a 24-hour emergency medical service just 5 minutes away. Italy is still quite cash-oriented, especially in small villages — bring euros and don't rely entirely on credit cards. Our wedding planner and her team will be on the ground to help with additional recommendations and questions — we'll share her number the week of the wedding.</p>
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Good to Know</h4>
+          <p class="explore-text">Petritoli has a pharmacy, bank, 2 ATMs, and a post office — all within walking distance. There's also a 24-hour emergency medical service just 5 minutes away. Italy is still quite cash-oriented, especially in small villages — bring euros and don't rely entirely on credit cards. Our wedding planner and her team will be on the ground to help with additional recommendations and questions — we'll share her number the week of the wedding.</p>
+        </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════ -->
-    <!-- SECTION 2: LE MARCHE                    -->
+    <!-- SECTION 2: LE MARCHE (collapsible)      -->
     <!-- ═══════════════════════════════════════ -->
-    <div class="explore-zone">
-      <div class="zone-header">
+    <div class="explore-zone explore-zone--collapsible">
+      <div class="zone-header zone-header--toggle" onclick="toggleExploreZone(this)">
         <span class="zone-number">02</span>
         <h3 class="zone-title">Le Marche Region</h3>
         <p class="zone-subtitle">Italy's best-kept secret — rolling hills, coastline, and mountains</p>
+        <span class="zone-toggle-icon">&#9660;</span>
       </div>
+      <div class="zone-content" style="display:none;">
 
-      <p class="explore-text">Le Marche is one of Italy's most underrated regions — the Italians themselves call it the most beautiful region in the country. Think Tuscany's beauty without the crowds. Our wedding planner works with local guides to organize group tours, and we highly recommend joining at least one. It's a fantastic way to connect with the area and with each other.</p>
+        <p class="explore-text">Le Marche is one of Italy's most underrated regions — the Italians themselves call it the most beautiful region in the country. Think Tuscany's beauty without the crowds. Our wedding planner works with local guides to organize group tours, and we highly recommend joining at least one. It's a fantastic way to connect with the area and with each other.</p>
 
-      <!-- ═══ TUESDAY: GRAPE STOMPING ═══ -->
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Tuesday Group Activity: Grape Stomping</h4>
-        <p class="explore-text" style="margin-bottom:20px;">Tuesday, September 1st is our group activity day, and we're working to organize a <strong>grape stomping festival</strong> as the main event — a truly unique experience that's only possible during harvest season in September and October. This is a once-in-a-lifetime opportunity to participate in one of Le Marche's oldest traditions, and it's best enjoyed as a big group.</p>
+        <!-- ═══ TUESDAY: GRAPE STOMPING ═══ -->
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Tuesday Group Activity: Grape Stomping</h4>
+          <p class="explore-text" style="margin-bottom:20px;">Tuesday, September 1st is our group activity day, and we're organizing a <strong>grape stomping festival</strong> as the main event — a truly unique experience that's only possible during harvest season in September and October.</p>
 
-        <div class="tour-featured">
-          <div class="tour-featured-badge">The Big Group Activity</div>
-          <div class="tour-card-header">
-            <span class="tour-emoji">🍇</span>
-            <h5 class="tour-name">Grape Stomping Festival</h5>
+          <div class="tour-featured">
+            <div class="tour-featured-badge">The Big Group Activity</div>
+            <div class="tour-card-header">
+              <span class="tour-emoji">🍇</span>
+              <h5 class="tour-name">Grape Stomping Festival</h5>
+            </div>
+            <p class="tour-desc">Travel back in time and experience the ancient grape harvest tradition of Le Marche. You'll stomp grapes barefoot the old-fashioned way, learning the traditional <em>vino cotto</em> ("cooked wine") making process that has been passed down through generations. The day includes a traditional lunch prepared with ancient local recipes, paired with local wine, and entertainment from folk musicians with traditional players and dancers in full costume. It's the kind of thing you'll never forget — a full celebration of the harvest season with food, wine, music, and community.</p>
+            <div class="tour-details">
+              <span>5–6 hours (flexible)</span>
+              <span>~20 min on foot from Petritoli</span>
+              <span>Starts ~10:30 AM</span>
+            </div>
+            <div class="tour-price">~€50–90 per person (based on group size) · Includes lunch, folk music &amp; dancers</div>
+            <p class="tour-desc" style="margin-top:10px; font-size:0.82rem; color:var(--stone);">We're working hard to coordinate the best logistics and pricing for everyone. Since this is dependent on grape harvest season timing, we'll confirm the activity closer to the date. If grape stomping doesn't work out, we'll organize similar activities that give you a taste of the region.</p>
+            <a href="https://www.youtube.com/watch?v=7Isu-gXMM3I" target="_blank" rel="noopener noreferrer" class="tour-video-link">▶ Watch a video of the grape stomping experience</a>
           </div>
-          <p class="tour-desc">Travel back in time and experience the ancient grape harvest tradition of Le Marche. You'll stomp grapes barefoot the old-fashioned way, learning the traditional <em>vino cotto</em> ("cooked wine") making process that has been passed down through generations. The day includes a traditional lunch prepared with ancient local recipes, paired with local wine, and entertainment from folk musicians with traditional players and dancers in full costume. It's the kind of thing you'll never forget — a full celebration of the harvest season with food, wine, music, and community.</p>
-          <div class="tour-details">
-            <span>5–6 hours (flexible)</span>
-            <span>~20 min on foot from Petritoli</span>
-            <span>Starts ~10:30–11:00 AM</span>
-          </div>
-          <div class="tour-price">€85–95 per adult · Includes lunch, folk music &amp; dancers</div>
-          <p class="tour-desc" style="margin-top:10px; font-size:0.82rem; color:var(--stone);">We're working on getting discounted rates for children and group pricing — we'll keep everyone updated as we finalize details. Since this is dependent on grape harvest season timing, we'll confirm the activity closer to the date. If grape stomping doesn't work out, we'll organize similar activities that give you a taste of the region.</p>
-          <a href="https://www.youtube.com/watch?v=7Isu-gXMM3I" target="_blank" rel="noopener noreferrer" class="tour-video-link">▶ Watch a video of the grape stomping experience</a>
         </div>
-      </div>
 
-      <!-- ═══ OTHER TOURS ═══ -->
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">More Tours Our Planner Can Arrange</h4>
-        <p class="explore-text" style="margin-bottom:20px;">These tours can be arranged through our wedding planner for Tuesday (if we change direction from grape stomping), or for other days during the week — Monday if you arrive early, Friday or beyond if you're extending your stay. Please don't schedule tours on the wedding day (Wednesday). Transportation to tours outside Petritoli is at an additional cost.</p>
+        <!-- ═══ OTHER TOURS ═══ -->
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">More Tours Our Planner Can Arrange</h4>
+          <p class="explore-text" style="margin-bottom:20px;">These tours can be arranged through our wedding planner for Tuesday (if you prefer to explore on your own), or for other days during the week — Monday if you arrive early, Friday or beyond if you're extending your stay. Please don't schedule tours on the wedding day (Wednesday). Transportation to tours outside Petritoli is at an additional cost.</p>
 
-        <div class="tour-grid">
+          <div class="tour-grid">
 
-          <!-- WINE TASTING -->
-          <div class="tour-card">
-            <div class="tour-card-header">
-              <span class="tour-emoji">🍷</span>
-              <h5 class="tour-name">Wine Tasting</h5>
+            <!-- WINE TASTING -->
+            <div class="tour-card">
+              <div class="tour-card-header">
+                <span class="tour-emoji">🍷</span>
+                <h5 class="tour-name">Wine Tasting</h5>
+              </div>
+              <p class="tour-desc">Visit a local family-owned winery and be guided by the owner! You'll learn about the history and evolution of wine production in this geographical area, and understand each step of the process — from harvesting the grapes to bottling the wine. The tour includes wine tasting with typical local food.</p>
+              <div class="tour-details">
+                <span>3–4 hours</span>
+                <span>15 min by car · 20 min by bus</span>
+              </div>
+              <div class="tour-price">€70 per person · Includes antipasti + pasta · Transport additional</div>
+              <a href="https://www.youtube.com/watch?v=9EqOOejHJFk" target="_blank" rel="noopener noreferrer" class="tour-video-link">▶ Watch a video</a>
             </div>
-            <p class="tour-desc">Visit a local family-owned winery and be guided by the owner! You'll learn about the history and evolution of wine production in this geographical area, and understand each step of the process — from harvesting the grapes to bottling the wine. The tour includes wine tasting with typical local food.</p>
-            <div class="tour-details">
-              <span>3–4 hours</span>
-              <span>15 min by car · 20 min by bus</span>
+
+            <!-- CHEESE TASTING -->
+            <div class="tour-card">
+              <div class="tour-card-header">
+                <span class="tour-emoji">🧀</span>
+                <h5 class="tour-name">Handmade Cheese Tasting</h5>
+              </div>
+              <p class="tour-desc">Are you a cheese lover? This experiential tour is for you! A wide variety of delicious cheeses are produced in the Le Marche region — <em>caciotta</em> and <em>pecorino</em>, just to name a few. Join a guided tour at a local farm and do a cheese tasting with typical local food. You'll get to try traditional cheeses and ones with a twist — truffles, olives, or herbs.</p>
+              <div class="tour-details">
+                <span>3–4 hours</span>
+                <span>30 min by car · 45 min by bus</span>
+              </div>
+              <div class="tour-price">€45 per person · Transport additional</div>
             </div>
-            <div class="tour-price">€70 per person · Includes antipasti + pasta · Transport additional</div>
-            <a href="https://www.youtube.com/watch?v=9EqOOejHJFk" target="_blank" rel="noopener noreferrer" class="tour-video-link">▶ Watch a video</a>
+
+            <!-- TRUFFLE HUNTING -->
+            <div class="tour-card">
+              <div class="tour-card-header">
+                <span class="tour-emoji">🐕</span>
+                <h5 class="tour-name">Truffle Hunting &amp; Tasting</h5>
+              </div>
+              <p class="tour-desc">To all the adventure seekers and foodies — this is a truly unique experience! You'll learn truffle hunting techniques and secrets from expert <em>tartuficultori</em> (truffle-growers) and feel the thrilling scent and taste of truffle and other local gastronomic excellences. The tour includes truffle hunting with dogs, a cooking show, aperitif with local wine and typical food, and a full lunch with truffle.</p>
+              <div class="tour-details">
+                <span>3–4 hours</span>
+                <span>45 min by car · 60 min by bus</span>
+              </div>
+              <div class="tour-price">€168 per person · Transport additional</div>
+            </div>
+
+            <!-- E-BIKE -->
+            <div class="tour-card">
+              <div class="tour-card-header">
+                <span class="tour-emoji">🚴</span>
+                <h5 class="tour-name">E-Bike Tour</h5>
+              </div>
+              <p class="tour-desc">Two wheels, speed, adrenaline, and the majestic mountains of the Monti Sibillini National Park — these are the ingredients of this bike tour. Hop on a professional e-bike, fasten your helmet, and follow an expert guide on one of the many trails that will lead you to discover the breathtaking beauty of the Marche mountains. Tour includes professional e-bike, helmet, certified guide, and an aperitif with a glass of wine.</p>
+              <div class="tour-details">
+                <span>3–4 hours</span>
+                <span>Starts &amp; ends in Petritoli</span>
+              </div>
+              <div class="tour-price">€73 per person · No transport needed</div>
+              <a href="https://www.youtube.com/watch?v=OON18GwzwR8" target="_blank" rel="noopener noreferrer" class="tour-video-link">▶ Watch a video</a>
+            </div>
+
           </div>
-
-          <!-- CHEESE TASTING -->
-          <div class="tour-card">
-            <div class="tour-card-header">
-              <span class="tour-emoji">🧀</span>
-              <h5 class="tour-name">Handmade Cheese Tasting</h5>
-            </div>
-            <p class="tour-desc">Are you a cheese lover? This experiential tour is for you! A wide variety of delicious cheeses are produced in the Le Marche region — <em>caciotta</em> and <em>pecorino</em>, just to name a few. Join a guided tour at a local farm and do a cheese tasting with typical local food. You'll get to try traditional cheeses and ones with a twist — truffles, olives, or herbs.</p>
-            <div class="tour-details">
-              <span>3–4 hours</span>
-              <span>30 min by car · 45 min by bus</span>
-            </div>
-            <div class="tour-price">€45 per person · Transport additional</div>
-          </div>
-
-          <!-- TRUFFLE HUNTING -->
-          <div class="tour-card">
-            <div class="tour-card-header">
-              <span class="tour-emoji">🐕</span>
-              <h5 class="tour-name">Truffle Hunting &amp; Tasting</h5>
-            </div>
-            <p class="tour-desc">To all the adventure seekers and foodies — this is a truly unique experience! You'll learn truffle hunting techniques and secrets from expert <em>tartuficultori</em> (truffle-growers) and feel the thrilling scent and taste of truffle and other local gastronomic excellences. The tour includes truffle hunting with dogs, a cooking show, aperitif with local wine and typical food, and a full lunch with truffle.</p>
-            <div class="tour-details">
-              <span>3–4 hours</span>
-              <span>45 min by car · 60 min by bus</span>
-            </div>
-            <div class="tour-price">€168 per person · Transport additional</div>
-          </div>
-
-          <!-- E-BIKE -->
-          <div class="tour-card">
-            <div class="tour-card-header">
-              <span class="tour-emoji">🚴</span>
-              <h5 class="tour-name">E-Bike Tour</h5>
-            </div>
-            <p class="tour-desc">Two wheels, speed, adrenaline, and the majestic mountains of the Monti Sibillini National Park — these are the ingredients of this bike tour. Hop on a professional e-bike, fasten your helmet, and follow an expert guide on one of the many trails that will lead you to discover the breathtaking beauty of the Marche mountains. Tour includes professional e-bike, helmet, certified guide, and an aperitif with a glass of wine.</p>
-            <div class="tour-details">
-              <span>3–4 hours</span>
-              <span>Starts &amp; ends in Petritoli</span>
-            </div>
-            <div class="tour-price">€73 per person · No transport needed</div>
-            <a href="https://www.youtube.com/watch?v=OON18GwzwR8" target="_blank" rel="noopener noreferrer" class="tour-video-link">▶ Watch a video</a>
-          </div>
-
-          <!-- BOAT DAY -->
-          <div class="tour-card">
-            <div class="tour-card-header">
-              <span class="tour-emoji">⛵</span>
-              <h5 class="tour-name">Boat Day</h5>
-            </div>
-            <p class="tour-desc">Board a private boat and set sail along the Adriatic coast. The skipper will take you on a panoramic ride while music plays in the background. You'll have a chance to swim in crystal-clear water, and then at golden hour, glasses of wine and a wide aperitif of local sea delicacies will be served on board. The tour includes the boat trip, skipper, and a seafood lunch or dinner with 1 bottle of wine per 4 people (not possible to bring your own alcohol).</p>
-            <div class="tour-details">
-              <span>7 hours · Max 12 people per boat</span>
-              <span>60 min by car · 80 min by bus</span>
-            </div>
-            <div class="tour-price">€2,100 per boat (split among group) · Transport additional</div>
-          </div>
-
         </div>
-      </div>
 
-      <!-- SELF EXPLORATION -->
-      <div class="explore-subsection">
-        <h4 class="explore-subheading">Explore on Your Own</h4>
-        <p class="explore-text" style="margin-bottom:20px;">If you have a rental car (or arrange a car service), there's so much to discover independently in Le Marche and the surrounding area.</p>
+        <!-- SELF EXPLORATION -->
+        <div class="explore-subsection">
+          <h4 class="explore-subheading">Explore on Your Own</h4>
+          <p class="explore-text" style="margin-bottom:20px;">If you have a rental car (or arrange a car service), there's so much to discover independently in Le Marche and the surrounding area.</p>
 
-        <div class="self-explore-grid">
-          <div class="self-explore-card">
-            <div class="self-explore-name">Frasassi Caves</div>
-            <div class="self-explore-desc">One of Europe's most spectacular cave systems. Choose the Tourist Path (1 hr 15 min, suitable for everyone) or the Speleo-Adventure with climbing and narrow passages. About 90 min from Petritoli. Bring comfortable shoes and a sweatshirt — it's 14°C year-round inside.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Ascoli Piceno</div>
-            <div class="self-explore-desc">One of Le Marche's most beautiful cities with stunning travertine architecture and the Piazza del Popolo. Try <em>olive all'ascolana</em> and stop by <em>Caffè Meletti</em> for their famous anise liqueur, <em>Meletti</em>. 30 min from Petritoli.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Sibillini Mountains &amp; National Park</div>
-            <div class="self-explore-desc">A national park with incredible hiking trails — from gentle valley walks through medieval villages to steep mountain paths with panoramic ridges. Also great for cycling and mountain biking. Guided hikes are available through our planner (~€49/pp). About 1 hour from Petritoli.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Adriatic Beaches</div>
-            <div class="self-explore-desc">Only 20–30 minutes away. Sandy beaches, seafood restaurants, and beautiful sunrises. Porto San Giorgio and Grottammare are easy day trips. Monte Conero is a great spot for windsurfing and sailing.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Urbino</div>
-            <div class="self-explore-desc">A UNESCO World Heritage Site and birthplace of Raphael. The Palazzo Ducale is one of Italy's finest Renaissance palaces. About 2 hours north — worth it for art and history lovers.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Sanctuary of the Santa Casa — Loreto</div>
-            <div class="self-explore-desc">One of Italy's most important pilgrimage sites, housing what is believed to be the home of the Virgin Mary. A stunning basilica with breathtaking art. About 45 min from Petritoli.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Grotte di Camerano</div>
-            <div class="self-explore-desc">An underground labyrinth of caves and tunnels beneath the town of Camerano, carved over centuries. A fascinating and unusual visit. About 1 hour from Petritoli.</div>
-          </div>
-          <div class="self-explore-card">
-            <div class="self-explore-name">Gradara</div>
-            <div class="self-explore-desc">A perfectly preserved medieval castle and village — the setting of the famous love story of Paolo and Francesca from Dante's <em>Inferno</em>. About 2 hours north.</div>
+          <div class="self-explore-grid">
+            <div class="self-explore-card">
+              <div class="self-explore-name">Frasassi Caves</div>
+              <div class="self-explore-desc">One of Europe's most spectacular cave systems. Choose the Tourist Path (1 hr 15 min, suitable for everyone) or the Speleo-Adventure with climbing and narrow passages. About 90 min from Petritoli. Bring comfortable shoes and a sweatshirt — it's 14°C year-round inside.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Ascoli Piceno</div>
+              <div class="self-explore-desc">One of Le Marche's most beautiful cities with stunning travertine architecture and the Piazza del Popolo. Try <em>olive all'ascolana</em> and stop by <em>Caffè Meletti</em> for their famous anise liqueur, <em>Meletti</em>. 30 min from Petritoli.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Sibillini Mountains &amp; National Park</div>
+              <div class="self-explore-desc">A national park with incredible hiking trails — from gentle valley walks through medieval villages to steep mountain paths with panoramic ridges. Also great for cycling and mountain biking. Guided hikes are available through our planner (~€49/pp). About 1 hour from Petritoli.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Adriatic Beaches</div>
+              <div class="self-explore-desc">Only 20–30 minutes away. Sandy beaches, seafood restaurants, and beautiful sunrises. Porto San Giorgio and Grottammare are easy day trips. Monte Conero is a great spot for windsurfing and sailing.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Urbino</div>
+              <div class="self-explore-desc">A UNESCO World Heritage Site and birthplace of Raphael. The Palazzo Ducale is one of Italy's finest Renaissance palaces. About 2 hours north — worth it for art and history lovers.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Sanctuary of the Santa Casa — Loreto</div>
+              <div class="self-explore-desc">One of Italy's most important pilgrimage sites, housing what is believed to be the home of the Virgin Mary. A stunning basilica with breathtaking art. About 45 min from Petritoli.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Grotte di Camerano</div>
+              <div class="self-explore-desc">An underground labyrinth of caves and tunnels beneath the town of Camerano, carved over centuries. A fascinating and unusual visit. About 1 hour from Petritoli.</div>
+            </div>
+            <div class="self-explore-card">
+              <div class="self-explore-name">Gradara</div>
+              <div class="self-explore-desc">A perfectly preserved medieval castle and village — the setting of the famous love story of Paolo and Francesca from Dante's <em>Inferno</em>. About 2 hours north.</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════ -->
-    <!-- SECTION 3: ITALY                        -->
+    <!-- SECTION 3: BEYOND (collapsible)         -->
     <!-- ═══════════════════════════════════════ -->
-    <div class="explore-zone" style="border-bottom:none;">
-      <div class="zone-header">
+    <div class="explore-zone explore-zone--collapsible" style="border-bottom:none;">
+      <div class="zone-header zone-header--toggle" onclick="toggleExploreZone(this)">
         <span class="zone-number">03</span>
         <h3 class="zone-title">Beyond Le Marche</h3>
         <p class="zone-subtitle">If you're extending your trip in Italy</p>
+        <span class="zone-toggle-icon">&#9660;</span>
       </div>
+      <div class="zone-content" style="display:none;">
 
-      <p class="explore-text">Since you're already flying to Italy, we'd encourage you to explore more of the country before or after the wedding week. Here are some of our favorite places, all reachable from Le Marche.</p>
+        <p class="explore-text">Since you're already flying to Italy, we'd encourage you to explore more of the country before or after the wedding week. Here are some of our favorite places, all reachable from Le Marche.</p>
 
-      <div class="italy-grid">
+        <div class="italy-grid">
 
-        <div class="italy-card">
-          <div class="italy-card-name">Rome</div>
-          <div class="italy-card-drive">3–4 hours from Petritoli</div>
-          <p class="italy-card-desc">The Eternal City. The Colosseum, Vatican, Trastevere, and some of the best food in the world. If you're flying into Fiumicino, spend a day or two here on either end of the trip.</p>
+          <div class="italy-card">
+            <div class="italy-card-name">Rome</div>
+            <div class="italy-card-drive">3–4 hours from Petritoli</div>
+            <p class="italy-card-desc">The Eternal City. The Colosseum, Vatican, Trastevere, and some of the best food in the world. If you're flying into Fiumicino, spend a day or two here on either end of the trip.</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Florence</div>
+            <div class="italy-card-drive">3.5 hours from Petritoli</div>
+            <p class="italy-card-desc">The heart of the Renaissance. The Uffizi, the Duomo, and incredible food. A perfect base for exploring Tuscany.</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Tuscany</div>
+            <div class="italy-card-drive">3–4 hours from Petritoli</div>
+            <p class="italy-card-desc">Rolling vineyards, cypress-lined roads, and medieval hilltop towns. Siena, San Gimignano, Val d'Orcia, and Montepulciano are all unforgettable. Rent a car, get lost, and stop for wine wherever you see a sign.</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Amalfi Coast</div>
+            <div class="italy-card-drive">5 hours from Petritoli</div>
+            <p class="italy-card-desc">Positano, Ravello, Amalfi — dramatic cliffs, turquoise water, and lemon groves. Best paired with a night or two in Naples (don't skip the pizza).</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Cinque Terre</div>
+            <div class="italy-card-drive">4.5 hours from Petritoli</div>
+            <p class="italy-card-desc">Five colorful fishing villages clinging to the Ligurian coast. Hike between them, eat pesto, and swim in hidden coves. A classic Italian experience.</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Lake Como</div>
+            <div class="italy-card-drive">5.5 hours from Petritoli</div>
+            <p class="italy-card-desc">Elegant villas, crystal-clear water surrounded by mountains, and charming lakeside towns like Bellagio and Varenna. Best enjoyed slowly — take a ferry, have a long lunch, and watch the light change over the water.</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Bologna</div>
+            <div class="italy-card-drive">3 hours from Petritoli</div>
+            <p class="italy-card-desc">Italy's food capital. Famous for ragù, tortellini, and mortadella. A vibrant university city with beautiful porticoes and a relaxed energy.</p>
+          </div>
+
+          <div class="italy-card">
+            <div class="italy-card-name">Venice</div>
+            <div class="italy-card-drive">4.5 hours from Petritoli</div>
+            <p class="italy-card-desc">Unlike anywhere else on earth. Get lost in the canals, visit Murano for glassblowing, and have a spritz in Piazza San Marco. Best experienced in the early morning or evening.</p>
+          </div>
+
         </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Florence</div>
-          <div class="italy-card-drive">3.5 hours from Petritoli</div>
-          <p class="italy-card-desc">The heart of the Renaissance. The Uffizi, the Duomo, and incredible food. A perfect base for exploring Tuscany.</p>
-        </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Tuscany</div>
-          <div class="italy-card-drive">3–4 hours from Petritoli</div>
-          <p class="italy-card-desc">Rolling vineyards, cypress-lined roads, and medieval hilltop towns. Siena, San Gimignano, Val d'Orcia, and Montepulciano are all unforgettable. Rent a car, get lost, and stop for wine wherever you see a sign.</p>
-        </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Amalfi Coast</div>
-          <div class="italy-card-drive">5 hours from Petritoli</div>
-          <p class="italy-card-desc">Positano, Ravello, Amalfi — dramatic cliffs, turquoise water, and lemon groves. Best paired with a night or two in Naples (don't skip the pizza).</p>
-        </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Cinque Terre</div>
-          <div class="italy-card-drive">4.5 hours from Petritoli</div>
-          <p class="italy-card-desc">Five colorful fishing villages clinging to the Ligurian coast. Hike between them, eat pesto, and swim in hidden coves. A classic Italian experience.</p>
-        </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Lake Como</div>
-          <div class="italy-card-drive">5.5 hours from Petritoli</div>
-          <p class="italy-card-desc">Elegant villas, crystal-clear water surrounded by mountains, and charming lakeside towns like Bellagio and Varenna. Best enjoyed slowly — take a ferry, have a long lunch, and watch the light change over the water.</p>
-        </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Bologna</div>
-          <div class="italy-card-drive">3 hours from Petritoli</div>
-          <p class="italy-card-desc">Italy's food capital. Famous for ragù, tortellini, and mortadella. A vibrant university city with beautiful porticoes and a relaxed energy.</p>
-        </div>
-
-        <div class="italy-card">
-          <div class="italy-card-name">Venice</div>
-          <div class="italy-card-drive">4.5 hours from Petritoli</div>
-          <p class="italy-card-desc">Unlike anywhere else on earth. Get lost in the canals, visit Murano for glassblowing, and have a spritz in Piazza San Marco. Best experienced in the early morning or evening.</p>
-        </div>
-
       </div>
     </div>
 
   </div>
 </div>
+
+<script is:inline>
+function toggleExploreZone(header) {
+  const zone = header.closest('.explore-zone--collapsible');
+  const content = zone.querySelector('.zone-content');
+  const icon = zone.querySelector('.zone-toggle-icon');
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    icon.innerHTML = '&#9650;';
+    zone.classList.add('explore-zone--open');
+  } else {
+    content.style.display = 'none';
+    icon.innerHTML = '&#9660;';
+    zone.classList.remove('explore-zone--open');
+  }
+}
+</script>

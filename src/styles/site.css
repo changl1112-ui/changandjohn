@@ -1531,3 +1531,53 @@ nav {
     padding: 0 36px 0 12px;
   }
 }
+/* ═══════════════════ COLLAPSIBLE EXPLORE ZONES ═══════════════════ */
+.explore-zone--collapsible {
+  border: 1px solid rgba(107,141,181,0.15);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.explore-zone--collapsible .zone-header--toggle {
+  cursor: pointer;
+  padding: 28px 32px;
+  position: relative;
+  transition: background 0.3s;
+  user-select: none;
+}
+.explore-zone--collapsible .zone-header--toggle:hover {
+  background: rgba(107,141,181,0.04);
+}
+.zone-toggle-icon {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: var(--stone);
+  transition: transform 0.3s;
+}
+.explore-zone--open .zone-toggle-icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+.explore-zone--open {
+  border-color: rgba(107,141,181,0.3);
+}
+.zone-content {
+  padding: 0 32px 32px;
+}
+.explore-zone--collapsible .zone-header--toggle .zone-subtitle {
+  margin-bottom: 0;
+}
+@media (max-width: 600px) {
+  .explore-zone--collapsible .zone-header--toggle {
+    padding: 20px 48px 20px 20px;
+  }
+  .zone-content {
+    padding: 0 20px 24px;
+  }
+  .zone-toggle-icon {
+    right: 18px;
+  }
+}
