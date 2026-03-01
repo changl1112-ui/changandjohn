@@ -56,99 +56,329 @@ function toggleFaq(item) {
 }
 
 // RSVP
-let currentStep = 1;
-let rsvpData = { attending: null, plusOne: null, shuttle: null };
+// --- MOCK GUEST LIST ---
+// TODO: Replace with Google Sheets lookup
+const GUEST_LIST = {
+  'sarah-johnson': {
+    partyName: 'The Johnson Family',
+    guests: [
+      { name: 'Sarah Johnson', type: 'adult' },
+      { name: 'Tom Johnson', type: 'adult' },
+      { name: 'Emma Johnson', type: 'child' },
+      { name: 'Liam Johnson', type: 'child' }
+    ]
+  },
+  'tom-johnson': { redirect: 'sarah-johnson' },
+  'mike-chen': {
+    partyName: 'Mike Chen & Guest',
+    guests: [
+      { name: 'Mike Chen', type: 'adult' },
+      { name: 'Plus One', type: 'adult' }
+    ]
+  },
+  'david-kim': {
+    partyName: 'David Kim',
+    guests: [
+      { name: 'David Kim', type: 'adult' }
+    ]
+  }
+};
 
-function setAttendance(btn) {
-  btn.parentElement.querySelectorAll('.attendance-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  rsvpData.attending = btn.dataset.value;
-  document.getElementById('step1Next').disabled = false;
+let currentStep = 1;
+let totalSteps = 5;
+let currentParty = null;
+let guestAttendance = {};
+
+// ─── STEP 1: LOOKUP ───
+
+function lookupGuest() {
+  var first = document.getElementById('lookupFirst').value.trim().toLowerCase();
+  var last = document.getElementById('lookupLast').value.trim().toLowerCase();
+  var key = first + '-' + last;
+  var errorEl = document.getElementById('lookupError');
+
+  if (!first || !last) { errorEl.classList.add('show'); return; }
+
+  var party = GUEST_LIST[key];
+  if (party && party.redirect) party = GUEST_LIST[party.redirect];
+
+  if (!party) { errorEl.classList.add('show'); return; }
+
+  errorEl.classList.remove('show');
+  currentParty = party;
+  guestAttendance = {};
+  buildGuestCards();
+  goToStep(2);
 }
-function setPlusOne(btn) {
-  btn.parentElement.querySelectorAll('.attendance-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  rsvpData.plusOne = btn.dataset.value;
-  document.getElementById('plusoneFields').classList.toggle('show', btn.dataset.value === 'yes');
-  const dg = document.getElementById('plusOneDietaryGroup');
-  if (dg) dg.style.display = btn.dataset.value === 'yes' ? 'block' : 'none';
+
+// ─── STEP 2: BUILD GUEST CARDS ───
+
+function buildGuestCards() {
+  var summary = document.getElementById('partySummary');
+  var adults = currentParty.guests.filter(function(g) { return g.type === 'adult'; }).length;
+  var children = currentParty.guests.filter(function(g) { return g.type === 'child'; }).length;
+  var countText = adults + ' adult' + (adults !== 1 ? 's' : '');
+  if (children > 0) countText += ', ' + children + ' child' + (children !== 1 ? 'ren' : '');
+
+  summary.innerHTML =
+    '<div class="party-summary-name">' + currentParty.partyName + '</div>' +
+    '<div class="party-summary-count">' + countText + ' in your party</div>';
+
+  var container = document.getElementById('guestCards');
+  container.innerHTML = '';
+
+  currentParty.guests.forEach(function(guest, i) {
+    var isChild = guest.type === 'child';
+    var card = document.createElement('div');
+    card.className = 'guest-card';
+    card.id = 'guestCard' + i;
+
+    var detailsHTML = '';
+    if (isChild) {
+      detailsHTML =
+        '<div class="form-group">' +
+          '<label class="form-label">Age at time of wedding (Sep 2, 2026)</label>' +
+          '<input type="number" class="form-input" id="childAge' + i + '" placeholder="Age" min="0" max="17" style="max-width:120px;">' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label class="form-label">Dietary Restrictions / Allergies</label>' +
+          '<input type="text" class="form-input" id="dietary' + i + '" placeholder="e.g. no dairy, nut allergy...">' +
+        '</div>' +
+        '<div class="form-group" style="margin-bottom:0;">' +
+          '<label class="babysit-check">' +
+            '<input type="checkbox" id="babysit' + i + '">' +
+            '<span class="babysit-box">&#10003;</span>' +
+            '<span class="babysit-text">Requires babysitting during the ceremony or reception</span>' +
+          '</label>' +
+        '</div>';
+    } else {
+      detailsHTML =
+        '<div class="form-row">' +
+          '<div class="form-group">' +
+            '<label class="form-label">Phone</label>' +
+            '<input type="tel" class="form-input" id="phone' + i + '" placeholder="Phone number">' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label class="form-label">Email</label>' +
+            '<input type="email" class="form-input" id="email' + i + '" placeholder="Email address">' +
+          '</div>' +
+        '</div>' +
+        '<div class="form-group" style="margin-bottom:0;">' +
+          '<label class="form-label">Dietary Restrictions / Allergies</label>' +
+          '<input type="text" class="form-input" id="dietary' + i + '" placeholder="e.g. vegetarian, gluten-free, nut allergy...">' +
+        '</div>';
+    }
+
+    card.innerHTML =
+      '<div class="guest-card-header">' +
+        '<div class="guest-name">' + guest.name + '</div>' +
+        '<span class="guest-type ' + guest.type + '">' + (isChild ? 'Child' : 'Adult') + '</span>' +
+      '</div>' +
+      '<div class="attend-toggle">' +
+        '<button type="button" class="attend-btn" data-guest="' + i + '" data-attend="yes">&#129346; Will Attend</button>' +
+        '<button type="button" class="attend-btn" data-guest="' + i + '" data-attend="no">&#128546; Can\'t Make It</button>' +
+      '</div>' +
+      '<div class="guest-details" id="guestDetails' + i + '">' +
+        detailsHTML +
+      '</div>';
+
+    container.appendChild(card);
+
+    // Attach click handlers directly after appending
+    card.querySelectorAll('.attend-btn').forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var gIdx = parseInt(this.getAttribute('data-guest'));
+        var val = this.getAttribute('data-attend');
+        setGuestAttend(gIdx, val, this);
+      });
+    });
+  });
 }
-function setToggle(btn) {
-  btn.parentElement.querySelectorAll('.attendance-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  rsvpData[btn.dataset.group] = btn.dataset.value;
+
+// ─── GUEST ATTENDANCE TOGGLE ───
+
+function setGuestAttend(index, value, btn) {
+  guestAttendance[index] = value;
+  var card = document.getElementById('guestCard' + index);
+  var details = document.getElementById('guestDetails' + index);
+  var buttons = card.querySelectorAll('.attend-btn');
+
+  buttons.forEach(function(b) {
+    b.classList.remove('selected-yes', 'selected-no');
+  });
+  card.classList.remove('attending-yes', 'attending-no');
+
+  if (value === 'yes') {
+    btn.classList.add('selected-yes');
+    card.classList.add('attending-yes');
+    details.classList.add('show');
+  } else {
+    btn.classList.add('selected-no');
+    card.classList.add('attending-no');
+    details.classList.remove('show');
+  }
+
+  // Enable continue only when all guests have answered
+  var allAnswered = currentParty.guests.every(function(_, i) {
+    return guestAttendance[i] !== undefined;
+  });
+  document.getElementById('step2Next').disabled = !allAnswered;
 }
+
+// ─── STEP 2 → 3 TRANSITION (or decline) ───
+
+function handleStep2Next() {
+  var anyAttending = Object.values(guestAttendance).some(function(v) { return v === 'yes'; });
+  if (!anyAttending) {
+    // Everyone declined → show decline screen
+    document.querySelectorAll('.rsvp-step').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelector('.rsvp-progress').style.display = 'none';
+    document.getElementById('rsvpDecline').classList.add('show');
+  } else {
+    nextStep();
+  }
+}
+
+// ─── STEP 3: GRAPE STOMPING TOGGLE ───
+
+function toggleGrape(checkbox) {
+  var pref = document.getElementById('grapePref');
+  var check = document.getElementById('explorationCheck');
+  if (checkbox.checked) {
+    pref.classList.add('show');
+    check.style.borderRadius = '6px 6px 0 0';
+    check.style.marginBottom = '0';
+  } else {
+    pref.classList.remove('show');
+    check.style.borderRadius = '6px';
+    check.style.marginBottom = '8px';
+  }
+}
+
+// ─── NAVIGATION ───
+
+function goToStep(step) {
+  document.getElementById('step' + currentStep).classList.remove('active');
+  currentStep = step;
+  document.getElementById('step' + currentStep).classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) goToStep(currentStep + 1);
+}
+
+function prevStep() {
+  if (currentStep > 1) goToStep(currentStep - 1);
+}
+
 function updateProgress() {
-  const dots = document.querySelectorAll('.rsvp-progress-dot');
-  dots.forEach((d, i) => {
+  var dots = document.querySelectorAll('.rsvp-progress-dot');
+  dots.forEach(function(d, i) {
     d.classList.remove('active', 'done');
     if (i + 1 === currentStep) d.classList.add('active');
     else if (i + 1 < currentStep) d.classList.add('done');
   });
 }
-function nextStep() {
-  if (currentStep === 1) {
-    if (!document.getElementById('firstName').value.trim() || !document.getElementById('lastName').value.trim() || !document.getElementById('email').value.trim() || !rsvpData.attending) return;
-    if (rsvpData.attending === 'no') { submitDecline(); return; }
-  }
-  if (currentStep < 4) {
-    document.getElementById('step' + currentStep).classList.remove('active');
-    currentStep++;
-    document.getElementById('step' + currentStep).classList.add('active');
-    updateProgress();
-  }
-}
-function prevStep() {
-  if (currentStep > 1) {
-    document.getElementById('step' + currentStep).classList.remove('active');
-    currentStep--;
-    document.getElementById('step' + currentStep).classList.add('active');
-    updateProgress();
-  }
-}
+
+// ─── COLLECT ALL FORM DATA ───
+
 function collectFormData() {
-  const events = [];
-  document.querySelectorAll('input[name="events"]:checked').forEach(cb => events.push(cb.value));
+  // Guest data
+  var guests = [];
+  if (currentParty) {
+    currentParty.guests.forEach(function(guest, i) {
+      var guestData = {
+        name: guest.name,
+        type: guest.type,
+        attending: guestAttendance[i] || 'no'
+      };
+      if (guestAttendance[i] === 'yes') {
+        if (guest.type === 'child') {
+          var ageEl = document.getElementById('childAge' + i);
+          var babysitEl = document.getElementById('babysit' + i);
+          guestData.age = ageEl ? ageEl.value : '';
+          guestData.babysitting = babysitEl ? babysitEl.checked : false;
+        } else {
+          var phoneEl = document.getElementById('phone' + i);
+          var emailEl = document.getElementById('email' + i);
+          guestData.phone = phoneEl ? phoneEl.value.trim() : '';
+          guestData.email = emailEl ? emailEl.value.trim() : '';
+        }
+        var dietEl = document.getElementById('dietary' + i);
+        guestData.dietary = dietEl ? dietEl.value.trim() : '';
+      }
+      guests.push(guestData);
+    });
+  }
+
+  // Events
+  var events = [];
+  document.querySelectorAll('input[name="events"]:checked').forEach(function(cb) {
+    events.push(cb.value);
+  });
+
+  // Grape preference
+  var grapePrefEl = document.querySelector('input[name="grapePref"]:checked');
+  var grapePref = grapePrefEl ? grapePrefEl.value : '';
+
   return {
     timestamp: new Date().toISOString(),
-    firstName: document.getElementById('firstName').value.trim(),
-    lastName: document.getElementById('lastName').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    attending: rsvpData.attending,
-    plusOne: rsvpData.plusOne || 'no',
-    plusOneName: document.getElementById('plusOneName')?.value.trim() || '',
+    partyName: currentParty ? currentParty.partyName : '',
+    guests: JSON.stringify(guests),
     events: events.join(', '),
-    accommodation: document.getElementById('accommodation')?.value || '',
-    arrivalDate: document.getElementById('arrivalDate')?.value || '',
-    departureDate: document.getElementById('departureDate')?.value || '',
-    shuttle: rsvpData.shuttle || '',
-    airport: document.getElementById('airport')?.value || '',
-    dietary: document.getElementById('dietary')?.value.trim() || '',
-    plusOneDietary: document.getElementById('plusOneDietary')?.value.trim() || '',
-    notes: document.getElementById('notes')?.value.trim() || ''
+    grapePref: grapePref,
+    accommodation: (document.getElementById('accommodation') || {}).value || '',
+    arrivalDate: (document.getElementById('arrivalDate') || {}).value || '',
+    departureDate: (document.getElementById('departureDate') || {}).value || '',
+    transportTo: (document.getElementById('transportTo') || {}).value || '',
+    transferToDetails: (document.getElementById('transferToDetails') || {}).value.trim() || '',
+    transportFrom: (document.getElementById('transportFrom') || {}).value || '',
+    transferFromDetails: (document.getElementById('transferFromDetails') || {}).value.trim() || '',
+    specialNeeds: (document.getElementById('specialNeeds') || {}).value.trim() || '',
+    sweetNote: (document.getElementById('sweetNote') || {}).value.trim() || ''
   };
 }
-function submitDecline() {
-  sendToSheet(collectFormData());
-  document.querySelectorAll('.rsvp-step').forEach(s => s.classList.remove('active'));
-  document.querySelector('.rsvp-progress').style.display = 'none';
-  document.getElementById('rsvpDecline').classList.add('show');
-}
+
+// ─── SUBMIT ───
+
 function submitRSVP() {
-  const btn = document.getElementById('submitBtn');
-  btn.textContent = 'Sending...'; btn.disabled = true;
+  var btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
   sendToSheet(collectFormData());
-  setTimeout(() => {
-    document.querySelectorAll('.rsvp-step').forEach(s => s.classList.remove('active'));
+  setTimeout(function() {
+    document.querySelectorAll('.rsvp-step').forEach(function(s) { s.classList.remove('active'); });
     document.querySelector('.rsvp-progress').style.display = 'none';
     document.getElementById('rsvpSuccess').classList.add('show');
   }, 800);
 }
-function sendToSheet(data) {
-  const SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-  if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') { console.log('RSVP:', data); return; }
-  fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(e => console.log(e));
+
+function submitDeclineMessage() {
+  var data = collectFormData();
+  data.declineNote = (document.getElementById('declineNote') || {}).value.trim() || '';
+  sendToSheet(data);
+  document.getElementById('rsvpDecline').classList.remove('show');
+  document.getElementById('rsvpDeclineSent').classList.add('show');
 }
+
+function sendToSheet(data) {
+  var SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+  if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    console.log('RSVP data:', data);
+    return;
+  }
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(function(e) { console.log(e); });
+}
+
 
 // Initialize page from URL hash if present
 const initialPage = (window.location.hash || '').replace('#', '');
