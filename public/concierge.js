@@ -82,6 +82,7 @@
       #wedding-chat-form{display:flex;gap:6px;padding:10px;border-top:1px solid #ece5d8;background:#faf9f6}
       #wedding-chat-input{flex:1;border:1px solid #d7d0c3;border-radius:8px;padding:8px;font:13px Outfit,sans-serif}
       #wedding-chat-send{border:none;background:#f26a2e;color:#fff;border-radius:8px;padding:8px 10px;font:600 12px Outfit,sans-serif;cursor:pointer}
+      .wq{border:1px solid #d7d0c3;background:#fff;border-radius:999px;padding:4px 8px;font:12px Outfit,sans-serif;color:#2a3b56;cursor:pointer}
     `;
     document.head.appendChild(style);
 
@@ -94,6 +95,7 @@
     widget.innerHTML = `
       <div id="wedding-chat-head"><h4>${t('title')}</h4><p>${t('subtitle')}</p></div>
       <div id="wedding-chat-messages"></div>
+      <div id="wedding-chat-quick" style="display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;border-top:1px solid #f0eadf;background:#fff"></div>
       <form id="wedding-chat-form">
         <input id="wedding-chat-input" placeholder="${t('placeholder')}" />
         <button id="wedding-chat-send" type="submit">${t('send')}</button>
@@ -104,6 +106,7 @@
     document.body.appendChild(bubble);
 
     const msgs = widget.querySelector('#wedding-chat-messages');
+    const quick = widget.querySelector('#wedding-chat-quick');
     const form = widget.querySelector('#wedding-chat-form');
     const input = widget.querySelector('#wedding-chat-input');
 
@@ -116,6 +119,18 @@
     };
 
     say(t('greet'), 'bot');
+
+    (t('quick') || []).forEach((q) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wq';
+      b.textContent = q;
+      b.addEventListener('click', () => {
+        say(q, 'you');
+        say(answerFor(q), 'bot');
+      });
+      quick.appendChild(b);
+    });
 
     bubble.addEventListener('click', () => {
       widget.classList.toggle('open');

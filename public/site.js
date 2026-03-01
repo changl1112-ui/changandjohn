@@ -28,6 +28,7 @@ function showPage(pageId) {
   });
 
   if (history.replaceState) history.replaceState(null, '', '#' + pageId);
+  if (pageId === 'rsvp') preloadGuestIndex();
   closeMenu();
 }
 
@@ -85,8 +86,44 @@ let currentStep = 1;
 let totalSteps = 5;
 let currentParty = null;
 let guestAttendance = {};
+let guestIndexData = null;
+let guestIndexLoaded = false;
 
 // ─── STEP 1: LOOKUP (live from Google Sheet) ───
+
+function normalizeLookupText(v) {
+  return String(v || '').replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+function preloadGuestIndex() {
+  if (guestIndexLoaded) return Promise.resolve(guestIndexData);
+  guestIndexLoaded = true;
+  return fetch('/guest-index.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('guest-index-http-' + r.status); return r.json(); })
+    .then(function (data) { guestIndexData = data; return data; })
+    .catch(function () { guestIndexData = null; return null; });
+}
+
+function lookupFromGuestIndex(first, last) {
+  if (!guestIndexData || !guestIndexData.lookup || !guestIndexData.parties) return null;
+  var f = normalizeLookupText(first);
+  var l = normalizeLookupText(last);
+  var candidates = [
+    { first: f, last: l },
+    { first: l, last: f }
+  ];
+  for (var i = 0; i < candidates.length; i++) {
+    var c = candidates[i];
+    var row = guestIndexData.lookup.find(function (x) {
+      return normalizeLookupText(x.first) === c.first && normalizeLookupText(x.last) === c.last;
+    });
+    if (!row) continue;
+    var party = guestIndexData.parties.find(function (p) { return String(p.partyId) === String(row.partyId); });
+    if (!party) continue;
+    return { found: true, partyId: party.partyId, partyName: party.partyName, guests: party.guests };
+  }
+  return null;
+}
 
 function lookupGuest() {
   var firstRaw = (document.getElementById('lookupFirst').value || '');
@@ -124,6 +161,21 @@ function lookupGuest() {
   if (errorEl) {
     errorEl.textContent = defaultErr;
     errorEl.classList.remove('show');
+  }
+
+  // Fast local lookup from guest-index.json (near-instant)
+  var local = lookupFromGuestIndex(first, last);
+  if (local && local.found) {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    currentParty = {
+      partyName: local.partyName,
+      guests: local.guests
+    };
+    guestAttendance = {};
+    buildGuestCards();
+    goToStep(2);
+    return;
   }
 
   // Resolve active URL defensively at runtime
@@ -231,9 +283,13 @@ function bindLookupEnterHandlers() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', bindLookupEnterHandlers);
+  document.addEventListener('DOMContentLoaded', function () {
+    bindLookupEnterHandlers();
+    preloadGuestIndex();
+  });
 } else {
   bindLookupEnterHandlers();
+  preloadGuestIndex();
 }
 
 
