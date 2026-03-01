@@ -1372,66 +1372,31 @@ footer {
   color: var(--deep-blue);
   font-weight: 500;
 }
-.registry-options {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 36px;
-}
-.registry-option {
+.registry-compact {
   background: var(--cream);
-  border: 1px solid rgba(107,141,181,0.12);
+  border: 1px solid rgba(107,141,181,0.14);
   border-radius: 10px;
-  padding: 28px 30px;
-  text-align: center;
-  transition: all 0.3s ease;
+  padding: 18px 20px;
+  margin: 0 auto 28px;
+  max-width: 560px;
+  text-align: left;
 }
-.registry-option:hover {
-  border-color: rgba(107,141,181,0.25);
-  box-shadow: 0 8px 24px rgba(61,90,128,0.1);
-  transform: translateY(-2px);
-}
-.registry-option-icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-.registry-option-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--deep-blue);
-  margin-bottom: 10px;
-}
-.registry-option-detail {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 0.92rem;
-}
-.registry-handle {
-  background: rgba(61,90,128,0.08);
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 400;
-  color: var(--deep-blue);
-  letter-spacing: 0.02em;
-}
-.registry-or {
-  font-size: 0.8rem;
-  color: var(--stone);
-  font-style: italic;
-}
-.registry-text-small {
-  font-size: 0.92rem;
+.registry-compact-title {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
   color: var(--dark);
-  opacity: 0.8;
+  opacity: 0.9;
 }
-.registry-text-small strong {
-  font-weight: 500;
+.registry-compact-line {
+  margin: 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--dark);
+  opacity: 0.85;
+}
+.registry-compact-line strong {
   color: var(--deep-blue);
+  font-weight: 500;
 }
 .registry-note {
   background: rgba(242,106,46,0.06);
