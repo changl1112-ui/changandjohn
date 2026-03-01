@@ -75,6 +75,7 @@
       @media (max-width: 700px){
         #wedding-chat-widget{right:10px;left:10px;width:auto;bottom:78px;max-height:58vh}
         #wedding-chat-bubble{right:10px;bottom:12px;padding:10px 14px}
+        #wedding-chat-input{font-size:16px}
       }
       #wedding-chat-widget.open{display:flex}
       #wedding-chat-head{padding:10px 12px;background:#f7f4ee;border-bottom:1px solid #ece5d8}
@@ -85,7 +86,7 @@
       .wm.bot{background:#f2f4f8;color:#20314b}
       .wm.you{background:#eef7ef;color:#24462a;align-self:flex-end}
       #wedding-chat-form{display:flex;gap:6px;padding:10px;border-top:1px solid #ece5d8;background:#faf9f6}
-      #wedding-chat-input{flex:1;border:1px solid #d7d0c3;border-radius:8px;padding:8px;font:13px Outfit,sans-serif}
+      #wedding-chat-input{flex:1;border:1px solid #d7d0c3;border-radius:8px;padding:10px;font:16px Outfit,sans-serif;-webkit-text-size-adjust:100%}
       #wedding-chat-send{border:none;background:#f26a2e;color:#fff;border-radius:8px;padding:8px 10px;font:600 12px Outfit,sans-serif;cursor:pointer}
       .wq{border:1px solid #d7d0c3;background:#fff;border-radius:999px;padding:4px 8px;font:12px Outfit,sans-serif;color:#2a3b56;cursor:pointer}
     `;
@@ -140,7 +141,10 @@
     function setWidgetOpen(open) {
       widget.classList.toggle('open', !!open);
       bubble.classList.toggle('hidden', !!open);
-      if (open) input.focus();
+      if (open) {
+        // Avoid aggressive mobile zoom/scroll jump on open
+        if (window.innerWidth > 700) input.focus();
+      }
       if (!open) {
         try { input.blur(); } catch(e) {}
       }
