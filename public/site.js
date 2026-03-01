@@ -95,28 +95,32 @@ function normalizeLookupText(v) {
   return String(v || '').replace(/\s+/g, ' ').trim().toLowerCase();
 }
 
+function fnv1aHash(text) {
+  var h = 0x811c9dc5;
+  for (var i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = (h * 0x01000193) >>> 0;
+  }
+  return ('00000000' + h.toString(16)).slice(-8);
+}
+
 function preloadGuestIndex() {
   if (guestIndexLoaded) return Promise.resolve(guestIndexData);
   guestIndexLoaded = true;
-  return fetch('/guest-index.json', { cache: 'no-store' })
+  return fetch('/guest-index-hash.json', { cache: 'no-store' })
     .then(function (r) { if (!r.ok) throw new Error('guest-index-http-' + r.status); return r.json(); })
     .then(function (data) { guestIndexData = data; return data; })
     .catch(function () { guestIndexData = null; return null; });
 }
 
 function lookupFromGuestIndex(first, last) {
-  if (!guestIndexData || !guestIndexData.lookup || !guestIndexData.parties) return null;
+  if (!guestIndexData || !guestIndexData.entries || !guestIndexData.parties) return null;
   var f = normalizeLookupText(first);
   var l = normalizeLookupText(last);
-  var candidates = [
-    { first: f, last: l },
-    { first: l, last: f }
-  ];
-  for (var i = 0; i < candidates.length; i++) {
-    var c = candidates[i];
-    var row = guestIndexData.lookup.find(function (x) {
-      return normalizeLookupText(x.first) === c.first && normalizeLookupText(x.last) === c.last;
-    });
+  var hashes = [fnv1aHash(f + '|' + l), fnv1aHash(l + '|' + f)];
+
+  for (var i = 0; i < hashes.length; i++) {
+    var row = guestIndexData.entries.find(function (x) { return x.h === hashes[i]; });
     if (!row) continue;
     var party = guestIndexData.parties.find(function (p) { return String(p.partyId) === String(row.partyId); });
     if (!party) continue;
