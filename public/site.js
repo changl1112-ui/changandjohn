@@ -32,20 +32,39 @@ function showPage(pageId) {
 }
 
 // Mobile menu
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
+var menuToggle = document.getElementById('menuToggle');
+var navLinks = document.getElementById('navLinks');
+
+function setMenu(open) {
+  menuToggle = menuToggle || document.getElementById('menuToggle');
+  navLinks = navLinks || document.getElementById('navLinks');
+  if (!menuToggle || !navLinks) return;
+
+  menuToggle.classList.toggle('active', !!open);
+  navLinks.classList.toggle('open', !!open);
+  menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
 if (menuToggle && navLinks) {
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navLinks.classList.toggle('open');
-    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  menuToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var willOpen = !navLinks.classList.contains('open');
+    setMenu(willOpen);
+  });
+
+  // Close when tapping outside nav on mobile
+  document.addEventListener('click', function(e) {
+    if (!navLinks.classList.contains('open')) return;
+    var insideNav = navLinks.contains(e.target);
+    var onToggle = menuToggle.contains(e.target);
+    if (!insideNav && !onToggle) setMenu(false);
   });
 }
+
 function closeMenu() {
-  if (!menuToggle || !navLinks) return;
-  menuToggle.classList.remove('active');
-  navLinks.classList.remove('open');
-  document.body.style.overflow = '';
+  setMenu(false);
 }
 
 // FAQ
@@ -175,6 +194,23 @@ function lookupGuest() {
       showLookupError(err && err.message ? err.message : 'lookup-fetch-error');
     });
 }
+
+// Enter key UX: submit RSVP guest lookup from first/last name fields
+(function initLookupEnterKey() {
+  var firstEl = document.getElementById('lookupFirst');
+  var lastEl = document.getElementById('lookupLast');
+  if (!firstEl || !lastEl) return;
+
+  function onEnter(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      lookupGuest();
+    }
+  }
+
+  firstEl.addEventListener('keydown', onEnter);
+  lastEl.addEventListener('keydown', onEnter);
+})();
 
 // Mock lookup for testing without Google Sheets
 function mockLookup(first, last, btn, originalText, errorEl) {
