@@ -29,7 +29,21 @@ const { locale = 'en' } = Astro.props;
   <RegistrySection />
   <QaSection />
   <Footer />
-  <script is:inline>window.__SITE_BUILD__ = '20260301b';</script>
-  <script is:inline src="/site.js?v=20260301b"></script>
-  <script is:inline src="/i18n.js?v=20260301b"></script>
+  <script is:inline>
+    window.__SITE_BUILD__ = '20260301c';
+    window.SHEET_URL = 'https://script.google.com/macros/s/AKfycbyeOp2H4i3iNh6GTDD_vJupY8rNqIkzCX97NdHwoWb-iv9ywAaUyLnHzFzljH8pudVj/exec';
+  </script>
+  <script is:inline src="/site.js?v=20260301c"></script>
+  <script is:inline>
+    // Runtime hardening in case an older cached site.js executes
+    try {
+      if (typeof SHEET_URL === 'undefined' || !SHEET_URL) {
+        SHEET_URL = window.SHEET_URL;
+      }
+    } catch (e) {
+      // If SHEET_URL isn't declared in loaded script, expose globally anyway
+      window.SHEET_URL = window.SHEET_URL;
+    }
+  </script>
+  <script is:inline src="/i18n.js?v=20260301c"></script>
 </BaseLayout>
