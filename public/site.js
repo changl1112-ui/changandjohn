@@ -1,6 +1,4 @@
 
-Copy
-
 // Page navigation
 function showPage(pageId) {
   const page = document.getElementById('page-' + pageId);
