@@ -6,6 +6,7 @@ const langMap = { en: 'en', es: 'es', 'zh-cn': 'zh-CN' };
 const htmlLang = langMap[locale] || 'en';
 
 const description = 'Join Chang & John for their wedding celebration in Petritoli, Italy — September 2, 2026.';
+const sitePassword = import.meta.env.PUBLIC_WEDDING_SITE_PASSWORD || '';
 ---
 <!doctype html>
 <html lang={htmlLang}>
@@ -28,6 +29,26 @@ const description = 'Join Chang & John for their wedding celebration in Petritol
     </script>
   </head>
   <body data-locale={locale}>
+    {sitePassword && (
+      <script is:inline define:vars={{ sitePassword }}>
+        (() => {
+          try {
+            const AUTH_KEY = 'wedding_site_auth_v1';
+            if (sessionStorage.getItem(AUTH_KEY) === 'ok') return;
+
+            const entered = window.prompt('Enter wedding website password');
+            if (entered === sitePassword) {
+              sessionStorage.setItem(AUTH_KEY, 'ok');
+              return;
+            }
+
+            document.body.innerHTML = '<main style="min-height:100vh;display:grid;place-items:center;font-family:system-ui,sans-serif;background:#f7f4ee;color:#2c2a26;"><div style="text-align:center;padding:24px;"><h1 style="margin:0 0 10px;font-size:28px;">Access denied</h1><p style="margin:0;opacity:.75;">Incorrect password.</p></div></main>';
+          } catch (e) {
+            // no-op
+          }
+        })();
+      </script>
+    )}
     <slot />
   </body>
 </html>
