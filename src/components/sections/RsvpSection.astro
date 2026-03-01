@@ -18,7 +18,7 @@
       <!-- STEP 1: LOOKUP -->
       <div class="rsvp-step active" id="step1">
         <h3>Find Your Invitation</h3>
-        <p class="step-sub">Enter your name as it appears on your invitation</p>
+        <p class="step-sub">Type your name exactly as it appears on your invitation</p>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">First Name *</label>
@@ -33,7 +33,7 @@
           We couldn't find that name on our guest list. Please try the name as it appears on your invitation, or reach out to Chang &amp; John directly.
         </div>
         <div class="rsvp-nav">
-          <button class="rsvp-nav-btn next" onclick="lookupGuest()">Find My Invitation</button>
+          <button class="rsvp-nav-btn next" onclick="lookupGuest()">Find invitation</button>
         </div>
       </div>
 
@@ -121,11 +121,11 @@
       <!-- STEP 4: TRAVEL & STAY -->
       <div class="rsvp-step" id="step4">
         <h3>Travel &amp; Stay</h3>
-        <p class="step-sub">Help us coordinate logistics for your group</p>
+        <p class="step-sub">Help us coordinate travel and stay details</p>
         <div class="form-group">
           <label class="form-label">Accommodation Preference</label>
           <select class="form-select" id="accommodation">
-            <option value="">Select...</option>
+            <option value="">Choose...</option>
             <option value="palazzo">Stay at Palazzo Mannocchi (&euro;280 in cash per person 12 years+)</option>
             <option value="hotel">Nearby hotel or Airbnb (we'll help coordinate with our planner)</option>
             <option value="own">I'll find my own</option>
@@ -135,7 +135,7 @@
           <div class="form-group">
             <label class="form-label">Arrival Date</label>
             <select class="form-select" id="arrivalDate">
-              <option value="">Select...</option>
+              <option value="">Choose...</option>
               <option value="aug31">Sunday, August 31</option>
               <option value="sep1">Monday, September 1</option>
             </select>
@@ -143,7 +143,7 @@
           <div class="form-group">
             <label class="form-label">Departure Date</label>
             <select class="form-select" id="departureDate">
-              <option value="">Select...</option>
+              <option value="">Choose...</option>
               <option value="sep3">Thursday, September 3</option>
               <option value="sep4">Friday, September 4</option>
             </select>
@@ -152,7 +152,7 @@
         <div class="form-group">
           <label class="form-label">How are you getting to Petritoli?</label>
           <select class="form-select" id="transportTo">
-            <option value="">Select...</option>
+            <option value="">Choose...</option>
             <option value="rental-car">Renting a car</option>
             <option value="main-shuttle">Main shuttle from Rome Tiburtina (~2PM Sunday, Aug 31)</option>
             <option value="other-transfer">Transfer from another location [we'll help organize to lower cost &mdash; at your own expense]</option>
@@ -167,7 +167,7 @@
         <div class="form-group">
           <label class="form-label">How are you leaving Petritoli?</label>
           <select class="form-select" id="transportFrom">
-            <option value="">Select...</option>
+            <option value="">Choose...</option>
             <option value="rental-car">Driving myself (rental car)</option>
             <option value="main-shuttle">Main shuttle back to Rome (~11AM Friday, Sep 4)</option>
             <option value="other-transfer">Shuttle to a different location [we'll help organize to lower cost &mdash; at your own expense]</option>
@@ -188,14 +188,14 @@
       <!-- STEP 5: FINAL -->
       <div class="rsvp-step" id="step5">
         <h3>Almost There!</h3>
-        <p class="step-sub">Any last details to help us plan the perfect week</p>
+        <p class="step-sub">Any last details that would help us plan</p>
         <div class="form-group">
           <label class="form-label">Special needs or requests for accommodations / activities</label>
           <textarea class="form-textarea" id="specialNeeds" placeholder="e.g. need a ground-floor room, mobility considerations, interested in a specific tour..."></textarea>
         </div>
         <div class="form-group">
           <label class="form-label">Song requests, questions, or just leave a sweet note &#128155;</label>
-          <textarea class="form-textarea" id="sweetNote" placeholder="What song will get you on the dance floor?"></textarea>
+          <textarea class="form-textarea" id="sweetNote" placeholder="What song gets you on the dance floor?"></textarea>
         </div>
         <div class="rsvp-nav">
           <button class="rsvp-nav-btn back" onclick="prevStep()">Back</button>
