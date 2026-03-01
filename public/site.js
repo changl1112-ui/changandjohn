@@ -108,10 +108,11 @@ function lookupGuest() {
     errorEl.classList.remove('show');
   }
 
-  // If no Sheet URL configured yet, fall back to mock data for testing
+  // Production mode: no mock fallback
   if (!SHEET_URL) {
-    console.log('No Sheet URL configured — using mock lookup');
-    mockLookup(first, last, btn, originalText, errorEl);
+    showLookupError('sheet-url-not-configured');
+    btn.textContent = originalText;
+    btn.disabled = false;
     return;
   }
 
